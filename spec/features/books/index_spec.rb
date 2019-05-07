@@ -74,4 +74,19 @@ RSpec.describe "Book index page" do
         expect(page).to have_content("Total Reviews: 3")
       end
     end
+    it "All instances of a books title is a link to a show page" do
+
+      visit books_path
+
+      within("#book-info-#{@book_1.id}") do
+        expect(page).to have_link(@book_1.title)
+      end
+      within("#book-info-#{@book_2.id}") do
+        expect(page).to have_link(@book_2.title)
+      end
+      within("#book-info-#{@book_3.id}") do
+        click_link @book_3.title
+      end
+      expect(current_path).to eq(book_path(@book_3))
   end
+end
