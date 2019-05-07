@@ -5,7 +5,7 @@
    <% @books.each do |book| %>
   <ul id="book-info-<%= book.id %>">
     <li>
-      <%= book.title %>
+      <%= link_to book.title, book_path(book) %>
     </li>
     <li>
       <%= book.pages %>

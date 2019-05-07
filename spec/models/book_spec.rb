@@ -42,7 +42,7 @@ describe Book do
     it ".avg_rating" do
 
       expect(@book_1.avg_rating.to_i).to eq(4)
-      expect(@book_2.avg_rating.to_i).to eq(3.3)
+      expect(@book_2.avg_rating.to_i).to eq(3)
       expect(@book_3.avg_rating.to_i).to eq(3)
     end
     it ".review_count" do
