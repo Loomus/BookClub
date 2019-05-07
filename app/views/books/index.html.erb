@@ -13,6 +13,9 @@
     <li>
       <%= book.year %>
     </li>
+    <% book.authors.each do |author| %>
+    <li> <%= author.name %></li>
+    <% end %>
         <img class="img-thumbnail" src="<%= book.cover_image %>">
       </ul>
   <% end %>
