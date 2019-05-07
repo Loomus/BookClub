@@ -1,0 +1,29 @@
+<h1><%= @book.title %> Show Page</h1>
+<section>
+  <ul>
+    <% @book.authors.each do |author| %>
+      <li><%= author.name %></li>
+      <% end %>
+      <li>Page Number: <%= @book.pages %></li>
+      <li><img class="img-thumbnail" src="<%= @book.cover_image %>"></li>
+  </ul>
+</section>
+<section id="review_info_<%=@book.id%>">
+  <ul>
+    <% @book.reviews.each do |review| %>
+    <li>
+      <%= review.title %>
+    </li>
+    <li>
+      <%= review.rating %>
+    </li>
+    <li>
+      <%= review.description %>
+    </li>
+    <%  %>
+    <li>
+      <%= review.user.name %>
+    </li>
+    <% end %>
+  </ul>
+</section>
