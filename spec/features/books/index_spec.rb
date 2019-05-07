@@ -10,9 +10,26 @@ RSpec.describe "Book index page" do
     @author_2 = @book_1.authors.create(name: "John")
     @author_3 = @book_2.authors.create(name: "Bill")
     @author_4 = @book_3.authors.create(name: "Megan")
+
+    @user_1 = User.create!(name: "John")
+    @user_2 = User.create!(name: "Bill")
+    @user_3 = User.create!(name: "Larry")
+
+    @review_1 = Review.create!(title: "review 1", rating: 5, description: "Book 1 review", user: @user_1, book: @book_1)
+    @review_2 = Review.create!(title: "review 2", rating: 4, description: "Book 1 review", user: @user_2, book: @book_1)
+    @review_3 = Review.create!(title: "review 3", rating: 3, description: "Book 1 review", user: @user_3, book: @book_1)
+
+    @review_4 = Review.create!(title: "review 4", rating: 3, description: "Book 1 review", user: @user_1, book: @book_2)
+    @review_5 = Review.create!(title: "review 5", rating: 4, description: "Book 1 review", user: @user_2, book: @book_2)
+    @review_6 = Review.create!(title: "review 6", rating: 3, description: "Book 1 review", user: @user_3, book: @book_2)
+
+    @review_7 = Review.create!(title: "review 7", rating: 3, description: "Book 1 review", user: @user_1, book: @book_3)
+    @review_8 = Review.create!(title: "review 8", rating: 4, description: "Book 1 review", user: @user_2, book: @book_3)
+    @review_9 = Review.create!(title: "review 9", rating: 2, description: "Book 1 review", user: @user_3, book: @book_3)
+
   end
 
-  describe "When I visit /books" do
+  describe "When I visit /books"
     it "Displays title, page number, year published, cover_image, and author/authors who wrote the book" do
 
       visit books_path
@@ -40,5 +57,21 @@ RSpec.describe "Book index page" do
       expect(page).to have_content(@author_4.name)
       end
     end
+    it "Next to each book title, I see its average book rating, and total number of reviews" do
+
+      visit books_path
+
+      within("#book-rev-stat-#{@book_1.id}") do
+        expect(page).to have_content("Average Rating: 4.0")
+        expect(page).to have_content("Total Reviews: 3")
+      end
+      within("#book-rev-stat-#{@book_2.id}") do
+        expect(page).to have_content("Average Rating: 3.3")
+        expect(page).to have_content("Total Reviews: 3")
+      end
+      within("#book-rev-stat-#{@book_3.id}") do
+        expect(page).to have_content("Average Rating: 3.0")
+        expect(page).to have_content("Total Reviews: 3")
+      end
+    end
   end
-end
