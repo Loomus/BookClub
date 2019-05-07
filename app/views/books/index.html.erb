@@ -1,0 +1,22 @@
+<h1>Books Index</h1>
+
+
+<div>
+   <% @books.each do |book| %>
+  <ul id="book-info-<%= book.id %>">
+    <li>
+      <%= book.title %>
+    </li>
+    <li>
+      <%= book.pages %>
+    </li>
+    <li>
+      <%= book.year %>
+    </li>
+    <% book.authors.each do |author| %>
+    <li> <%= author.name %></li>
+    <% end %>
+        <img class="img-thumbnail" src="<%= book.cover_image %>">
+      </ul>
+  <% end %>
+</div>
