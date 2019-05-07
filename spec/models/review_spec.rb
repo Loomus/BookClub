@@ -7,8 +7,8 @@ describe Review do
   end
 
   describe "Validations" do
-    it {should validates_presence_of :title}
-    it {should validates_presence_of :rating}
-    it {should validates_presence_of :description}
+    it {should validate_presence_of :title}
+    it {should validate_presence_of :rating}
+    it {should validate_presence_of :description}
   end
 end
