@@ -1,6 +1,9 @@
 <h1>Books Index</h1>
 
-
+<nav id="sorting">
+  <%= link_to "Average Rating Ascending", books_path({sort: :asc}) %>
+  <%= link_to "Average Rating Descending", books_path({sort: :desc}) %>
+</nav>
 <div>
    <% @books.each do |book| %>
   <ul id="book-info-<%= book.id %>">
