@@ -90,7 +90,7 @@ RSpec.describe "Book index page" do
       expect(current_path).to eq(book_path(@book_3))
   end
 
-  it "Shows a link to sort books by rating" do
+  xit "Shows a link to sort books by rating" do
     visit books_path
 
     within("#sorting") do
@@ -105,6 +105,6 @@ RSpec.describe "Book index page" do
     expect(page.all('li')[0]).to have_content(@book_1.title)
     expect(page.all('li')[1]).to have_content(@book_3.title)
     expect(page.all('li')[2]).to have_content(@book_2.title)
-    
+
   end
 end

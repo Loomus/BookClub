@@ -53,9 +53,9 @@ describe Book do
     end
   end
   describe "Class Methods" do
-    it ".sort_rating" do
+    xit ".sort_rating" do
 
-      expect(Book.sort_rating).to eq([@book_1,@book_3,@book_2])
+      expect(Book.sort_rating(:asc)).to eq([@book_1,@book_3,@book_2])
     end
   end
 end
