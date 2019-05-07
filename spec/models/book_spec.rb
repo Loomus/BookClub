@@ -16,17 +16,17 @@ describe Book do
     @user_2 = User.create!(name: "Bill")
     @user_3 = User.create!(name: "Larry")
 
-    @review_1 = Review.create!(title: "review 1", rating: 5, description: "Book 1 review", user: @user_1, book: @book_1)
-    @review_2 = Review.create!(title: "review 2", rating: 4, description: "Book 1 review", user: @user_2, book: @book_1)
-    @review_3 = Review.create!(title: "review 3", rating: 3, description: "Book 1 review", user: @user_3, book: @book_1)
+    @review_1 = Review.create!(title: "review 1", rating: 2, description: "Book 1 review", user: @user_1, book: @book_1)
+    @review_2 = Review.create!(title: "review 2", rating: 2, description: "Book 1 review", user: @user_2, book: @book_1)
+    @review_3 = Review.create!(title: "review 3", rating: 2, description: "Book 1 review", user: @user_3, book: @book_1)
 
     @review_4 = Review.create!(title: "review 4", rating: 3, description: "Book 1 review", user: @user_1, book: @book_2)
     @review_5 = Review.create!(title: "review 5", rating: 4, description: "Book 1 review", user: @user_2, book: @book_2)
     @review_6 = Review.create!(title: "review 6", rating: 3, description: "Book 1 review", user: @user_3, book: @book_2)
 
     @review_7 = Review.create!(title: "review 7", rating: 3, description: "Book 1 review", user: @user_1, book: @book_3)
-    @review_8 = Review.create!(title: "review 8", rating: 4, description: "Book 1 review", user: @user_2, book: @book_3)
-    @review_9 = Review.create!(title: "review 9", rating: 2, description: "Book 1 review", user: @user_3, book: @book_3)
+    @review_8 = Review.create!(title: "review 8", rating: 3, description: "Book 1 review", user: @user_2, book: @book_3)
+    @review_9 = Review.create!(title: "review 9", rating: 3, description: "Book 1 review", user: @user_3, book: @book_3)
   end
   describe "Relationships" do
     it { should have_many :book_authors }
@@ -41,7 +41,7 @@ describe Book do
   describe "Instance Methods" do
     it ".avg_rating" do
 
-      expect(@book_1.avg_rating.to_i).to eq(4)
+      expect(@book_1.avg_rating.to_i).to eq(2)
       expect(@book_2.avg_rating.to_i).to eq(3)
       expect(@book_3.avg_rating.to_i).to eq(3)
     end
@@ -50,6 +50,12 @@ describe Book do
       expect(@book_1.review_count).to eq(3)
       expect(@book_2.review_count).to eq(3)
       expect(@book_3.review_count).to eq(3)
+    end
+  end
+  describe "Class Methods" do
+    it ".sort_rating" do
+
+      expect(Book.sort_rating).to eq([@book_1,@book_3,@book_2])
     end
   end
 end

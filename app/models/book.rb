@@ -15,4 +15,8 @@ class Book < ApplicationRecord
   def review_count
     reviews.count
   end
+
+  def self.sort_rating
+    binding.pry
+  end
 end
