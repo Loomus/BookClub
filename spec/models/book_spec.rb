@@ -63,7 +63,7 @@ describe Book do
       expect(@book_1.top_3_reviews).to eq([@review_10,@review_2,@review_11])
     end
     it ".bottom_3_reviews" do
-      
+
       expect(@book_1.bottom_3_reviews).to eq([@review_12,@review_3,@review_1])
   end
   describe "Class Methods" do
@@ -86,8 +86,9 @@ describe Book do
       review_12 = Review.create!(title: "review 11", rating: 3, description: "Book 3 review 12", user: user_5, book: @book_3)
       @books = Book.all
 
-      expect(@books.sort_reviews(:desc)).to eq([@book_2, @book_3, @book_1])
-      expect(@books.sort_reviews(:asc)).to eq([@book_1, @book_3, @book_2])
+      expect(@books.sort_reviews(:desc)).to eq([@book_1, @book_2, @book_3])
+      expect(@books.sort_reviews(:asc)).to eq([@book_3, @book_2, @book_1])
+      end
     end
   end
 end
