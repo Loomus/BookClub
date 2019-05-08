@@ -1,10 +1,15 @@
 <h1>Books Index</h1>
 
 <nav id="sorting">
-  <%= link_to "Average Rating Ascending", books_path({sort: :asc}) %>
-  <%= link_to "Average Rating Descending", books_path({sort: :desc}) %>
+  <%= link_to "Highest Rated", books_path(sort: :rating, order: :desc) %>
+  <%= link_to "Lowest Rated", books_path(sort: :rating, order: :asc) %>
+  <%= link_to "Highest Page Count", books_path(sort: :pages, order: :desc) %>
+  <%= link_to "Lowest Page Count", books_path(sort: :pages, order: :asc) %>
+  <%= link_to "Most Reviewed", books_path(sort: :reviews, order: :desc) %>
+  <%= link_to "Least Reviewed", books_path(sort: :reviews, order: :asc) %>
 </nav>
-<div>
+
+<div id="books">
    <% @books.each do |book| %>
   <ul id="book-info-<%= book.id %>">
     <li>
@@ -16,14 +21,15 @@
     <li>
       <%= book.year %>
     </li>
+      <img class="img-thumbnail" src="<%= book.cover_image %>">
     <% book.authors.each do |author| %>
-    <li> <%= author.name %></li>
+    <p>
+      Authored By :<%= author.name %>
+    </p>
     <% end %>
-        <img class="img-thumbnail" src="<%= book.cover_image %>">
-      </ul>
-      <ul id="book-rev-stat-<%= book.id %>">
-        <li>Average Rating: <%= book.avg_rating.round(1) %></li>
-        <li>Total Reviews: <%= book.review_count.to_i %></li>
-      </ul>
-  <% end %>
+    <ul id="book-rev-stat-<%= book.id %>">
+      <li>Average Rating: <%= book.avg_rating.round(1) %></li>
+      <li>Total Reviews: <%= book.review_count.to_i %></li>
+    </ul>
+<% end %>
 </div>

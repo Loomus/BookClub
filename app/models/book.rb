@@ -23,4 +23,20 @@ class Book < ApplicationRecord
   def bottom_3_reviews
     reviews.order(:rating).limit(3)
   end
+    
+  def self.avg_rating_order(order)
+    joins(:reviews)
+    .group(:id)
+    .order("avg(reviews.rating) #{order}")
+  end
+
+  def self.sort_page_count(order)
+    order(pages: :"#{order}")
+  end
+
+  def self.sort_reviews(order)
+    joins(:reviews)
+    .group(:id)
+    .order("(reviews.count) #{order}")
+  end
 end
