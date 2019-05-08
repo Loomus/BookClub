@@ -21,4 +21,8 @@ class Book < ApplicationRecord
     .group(:id)
     .order("avg(reviews.rating) #{order}")
   end
+
+  def self.sort_page_count(order)
+    order(pages: :"#{order}")
+  end
 end

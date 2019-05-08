@@ -1,8 +1,10 @@
 class BooksController < ApplicationController
 
   def index
-    if params[:sort] == "asc" || "desc"
-    @books = Book.avg_rating_order(params[:sort])
+    if params[:rating] == "asc" || "desc"
+    @books = Book.avg_rating_order(params[:rating])
+    elsif params[:pages] == "asc" || "desc"
+    @books = Book.all
     else
     @books = Book.all
     end

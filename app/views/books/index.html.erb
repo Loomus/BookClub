@@ -1,8 +1,9 @@
 <h1>Books Index</h1>
 
 <nav id="sorting">
-  <%= link_to "Highest Rated", books_path({sort: :desc}) %>
-  <%= link_to "Lowest Rated", books_path({sort: :asc}) %>
+  <%= link_to "Highest Rated", books_path({rating: :desc}) %>
+  <%= link_to "Lowest Rated", books_path({rating: :asc}) %>
+  <%= link_to "Highest Page Count", books_path({pages: :desc}) %>
 </nav>
 
 <div id="books">

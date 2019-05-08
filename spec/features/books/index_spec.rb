@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Book index page" do
   before :each do
     @book_1 = Book.create(title: "Book 1 title", pages: 300, year: 1992, cover_image: "https://iguhb7lay20b9vtl-zippykid.netdna-ssl.com/wp-content/uploads/2018/04/1_wswf9QNmKrwTB883hHb4BQ.png")
-    @book_2 = Book.create(title: "Book 2 title", pages: 250, year: 1986, cover_image: "https://images.penguinrandomhouse.com/cover/9781101931288")
+    @book_2 = Book.create(title: "Book 2 title", pages: 350, year: 1986, cover_image: "https://images.penguinrandomhouse.com/cover/9781101931288")
     @book_3 = Book.create(title: "Book 3 title", pages: 125, year: 1942, cover_image: "https://s26162.pcdn.co/wp-content/uploads/2018/08/81Ya99Bc-jL.jpg")
 
     @author_1 = @book_1.authors.create(name: "Michael")
@@ -163,6 +163,42 @@ RSpec.describe "Book index page" do
       expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
       expect(page).to have_content(@author_3.name)
       expect(page.all('li')[13]).to have_content("Average Rating: 3.3")
+      expect(page.all('li')[14]).to have_content("Total Reviews: 3")
+    end
+  end
+  it "page has a link to sort by highest page count" do
+
+    visit books_path
+
+    within("#sorting") do
+      click_link "Highest Page Count"
+    end
+    expect(current_path).to eq(books_path)
+
+    within("#books") do
+      expect(page.all('li')[0]).to have_content(@book_2.title)
+      expect(page.all('li')[1]).to have_content(@book_2.pages)
+      expect(page.all('li')[2]).to have_content(@book_2.year)
+      expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
+      expect(page).to have_content(@author_3.name)
+      expect(page.all('li')[3]).to have_content("Average Rating: 3.3")
+      expect(page.all('li')[4]).to have_content("Total Reviews: 3")
+
+      expect(page.all('li')[5]).to have_content(@book_1.title)
+      expect(page.all('li')[6]).to have_content(@book_1.pages)
+      expect(page.all('li')[7]).to have_content(@book_1.year)
+      expect(page).to have_xpath('//img[@src="https://iguhb7lay20b9vtl-zippykid.netdna-ssl.com/wp-content/uploads/2018/04/1_wswf9QNmKrwTB883hHb4BQ.png"]')
+      expect(page).to have_content(@author_1.name)
+      expect(page).to have_content(@author_2.name)
+      expect(page.all('li')[8]).to have_content("Average Rating: 2.0")
+      expect(page.all('li')[9]).to have_content("Total Reviews: 3")
+
+      expect(page.all('li')[10]).to have_content(@book_3.title)
+      expect(page.all('li')[11]).to have_content(@book_3.pages)
+      expect(page.all('li')[12]).to have_content(@book_3.year)
+      expect(page).to have_xpath('//img[@src="https://s26162.pcdn.co/wp-content/uploads/2018/08/81Ya99Bc-jL.jpg"]')
+      expect(page).to have_content(@author_4.name)
+      expect(page.all('li')[13]).to have_content("Average Rating: 3.0")
       expect(page.all('li')[14]).to have_content("Total Reviews: 3")
     end
   end
