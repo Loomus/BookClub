@@ -64,5 +64,16 @@ describe Book do
       expect(@books.sort_page_count(:desc)).to eq([@book_2, @book_1, @book_3])
       expect(@books.sort_page_count(:asc)).to eq([@book_3, @book_1, @book_2])
     end
+    it ".sort_reviews" do
+      user_4 = User.create(name: "Joey")
+      user_5 = User.create(name: "Jenna")
+      review_10 = Review.create!(title: "review 10", rating: 5, description: "Book 2 review 10", user: user_4, book: @book_2)
+      review_11 = Review.create!(title: "review 11", rating: 2, description: "Book 2 review 11", user: user_5, book: @book_2)
+      review_12 = Review.create!(title: "review 11", rating: 3, description: "Book 3 review 12", user: user_5, book: @book_3)
+      @books = Book.all
+
+      expect(@books.sort_reviews(:desc)).to eq([@book_2, @book_3, @book_1])
+      expect(@books.sort_reviews(:asc)).to eq([@book_1, @book_3, @book_2])
+    end
   end
 end

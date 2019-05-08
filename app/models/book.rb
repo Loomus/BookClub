@@ -25,4 +25,10 @@ class Book < ApplicationRecord
   def self.sort_page_count(order)
     order(pages: :"#{order}")
   end
+
+  def self.sort_reviews(order)
+    joins(:reviews)
+    .group(:id)
+    .order("(reviews.count) #{order}")
+  end
 end
