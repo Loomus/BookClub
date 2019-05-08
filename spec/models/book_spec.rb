@@ -15,10 +15,16 @@ describe Book do
     @user_1 = User.create!(name: "John")
     @user_2 = User.create!(name: "Bill")
     @user_3 = User.create!(name: "Larry")
+    @user_4 = User.create!(name: "Stella")
+    @user_5 = User.create!(name: "Sarah")
+    @user_6 = User.create!(name: "Kristin")
 
-    @review_1 = Review.create!(title: "review 1", rating: 2, description: "Book 1 review", user: @user_1, book: @book_1)
-    @review_2 = Review.create!(title: "review 2", rating: 2, description: "Book 1 review", user: @user_2, book: @book_1)
-    @review_3 = Review.create!(title: "review 3", rating: 2, description: "Book 1 review", user: @user_3, book: @book_1)
+    @review_2 = Review.create!(title: "review 2", rating: 4, description: "Book 1 review", user: @user_2, book: @book_1)
+    @review_12 = Review.create!(title: "review 12", rating: 1, description: "Book 1 review", user: @user_6, book: @book_1)
+    @review_1 = Review.create!(title: "review 1", rating: 2, description: "Book 1 review", user: @user_4, book: @book_1)
+    @review_10 = Review.create!(title: "review 10", rating: 5, description: "Book 1 review", user: @user_1, book: @book_1)
+    @review_3 = Review.create!(title: "review 3", rating: 1, description: "Book 1 review", user: @user_5, book: @book_1)
+    @review_11 = Review.create!(title: "review 11", rating: 3, description: "Book 1 review", user: @user_3, book: @book_1)
 
     @review_4 = Review.create!(title: "review 4", rating: 3, description: "Book 1 review", user: @user_1, book: @book_2)
     @review_5 = Review.create!(title: "review 5", rating: 4, description: "Book 1 review", user: @user_2, book: @book_2)
@@ -27,6 +33,7 @@ describe Book do
     @review_7 = Review.create!(title: "review 7", rating: 3, description: "Book 1 review", user: @user_1, book: @book_3)
     @review_8 = Review.create!(title: "review 8", rating: 3, description: "Book 1 review", user: @user_2, book: @book_3)
     @review_9 = Review.create!(title: "review 9", rating: 3, description: "Book 1 review", user: @user_3, book: @book_3)
+
   end
   describe "Relationships" do
     it { should have_many :book_authors }
@@ -47,10 +54,17 @@ describe Book do
     end
     it ".review_count" do
 
-      expect(@book_1.review_count).to eq(3)
+      expect(@book_1.review_count).to eq(6)
       expect(@book_2.review_count).to eq(3)
       expect(@book_3.review_count).to eq(3)
     end
+    it ".top_3_reviews" do
+
+      expect(@book_1.top_3_reviews).to eq([@review_10,@review_2,@review_11])
+    end
+    it ".bottom_3_reviews" do
+      
+      expect(@book_1.bottom_3_reviews).to eq([@review_12,@review_3,@review_1])
   end
   describe "Class Methods" do
     it ".sort_rating" do
