@@ -4,7 +4,7 @@ require 'rails_helper'
 describe Book do
   before :each do
     @book_1 = Book.create(title: "Book 1 title", pages: 300, year: 1992, cover_image: "https://iguhb7lay20b9vtl-zippykid.netdna-ssl.com/wp-content/uploads/2018/04/1_wswf9QNmKrwTB883hHb4BQ.png")
-    @book_2 = Book.create(title: "Book 2 title", pages: 250, year: 1986, cover_image: "https://images.penguinrandomhouse.com/cover/9781101931288")
+    @book_2 = Book.create(title: "Book 2 title", pages: 350, year: 1986, cover_image: "https://images.penguinrandomhouse.com/cover/9781101931288")
     @book_3 = Book.create(title: "Book 3 title", pages: 125, year: 1942, cover_image: "https://s26162.pcdn.co/wp-content/uploads/2018/08/81Ya99Bc-jL.jpg")
 
     @author_1 = @book_1.authors.create(name: "Michael")
@@ -53,9 +53,27 @@ describe Book do
     end
   end
   describe "Class Methods" do
-    xit ".sort_rating" do
+    it ".sort_rating" do
+      @books = Book.all
+      expect(@books.avg_rating_order(:asc)).to eq([@book_1, @book_3, @book_2])
+      expect(@books.avg_rating_order(:desc)).to eq([@book_2, @book_3, @book_1])
+    end
+    it ".sort_page_count" do
+      @books = Book.all
 
-      expect(Book.sort_rating(:asc)).to eq([@book_1,@book_3,@book_2])
+      expect(@books.sort_page_count(:desc)).to eq([@book_2, @book_1, @book_3])
+      expect(@books.sort_page_count(:asc)).to eq([@book_3, @book_1, @book_2])
+    end
+    it ".sort_reviews" do
+      user_4 = User.create(name: "Joey")
+      user_5 = User.create(name: "Jenna")
+      review_10 = Review.create!(title: "review 10", rating: 5, description: "Book 2 review 10", user: user_4, book: @book_2)
+      review_11 = Review.create!(title: "review 11", rating: 2, description: "Book 2 review 11", user: user_5, book: @book_2)
+      review_12 = Review.create!(title: "review 11", rating: 3, description: "Book 3 review 12", user: user_5, book: @book_3)
+      @books = Book.all
+
+      expect(@books.sort_reviews(:desc)).to eq([@book_2, @book_3, @book_1])
+      expect(@books.sort_reviews(:asc)).to eq([@book_1, @book_3, @book_2])
     end
   end
 end
