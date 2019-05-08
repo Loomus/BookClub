@@ -11,19 +11,35 @@
 <section id="review_info_<%=@book.id%>">
   <ul>
     <% @book.reviews.each do |review| %>
-    <li>
-      <%= review.title %>
-    </li>
-    <li>
-      <%= review.rating %>
-    </li>
-    <li>
-      <%= review.description %>
-    </li>
-    <%  %>
-    <li>
-      <%= review.user.name %>
-    </li>
+    <li><%= review.title %></li>
+    <li><%= review.rating %></li>
+    <li><%= review.description %></li>
+    <li><%= review.user.name %></li>
     <% end %>
   </ul>
+</section>
+<h2>Statistics</h2>
+<h3>Top Ratings</h3>
+<section id="top_3_reviews_<%=@book.id%>">
+  <ul>
+    <% @book.top_3_reviews.each do |review| %>
+    <li><%= review.title %></li>
+    <li><%= review.rating  %></li>
+    <li><%= review.user.name %></li>
+    <% end %>
+  </ul>
+</section>
+<h4>Lowest Ratings</h4>
+<section id="bottom_3_reviews_<%=@book.id%>">
+  <ul>
+    <% @book.bottom_3_reviews.each do |review| %>
+    <li><%= review.title %></li>
+    <li><%= review.rating %></li>
+    <li><%= review.user.name %></li>
+    <% end %>
+  </ul>
+</section>
+<h5>Average Rating for this book:</h5>
+<section id="average_rating_<%= @book.id %>">
+  <p><%= @book.avg_rating %></p>
 </section>

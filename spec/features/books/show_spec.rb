@@ -14,12 +14,18 @@ describe "Books Show page" do
     @user_1 = User.create!(name: "John")
     @user_2 = User.create!(name: "Bill")
     @user_3 = User.create!(name: "Larry")
+    @user_4 = User.create!(name: "Stella")
+    @user_5 = User.create!(name: "Sarah")
+    @user_6 = User.create!(name: "Kristin")
 
-    @review_1 = Review.create!(title: "review 1", rating: 2, description: "Book 1 review", user: @user_1, book: @book_1)
-    @review_2 = Review.create!(title: "review 2", rating: 2, description: "Book 1 review", user: @user_2, book: @book_1)
-    @review_3 = Review.create!(title: "review 3", rating: 2, description: "Book 1 review", user: @user_3, book: @book_1)
-
+    @review_2 = Review.create!(title: "review 2", rating: 4, description: "Book 1 review", user: @user_2, book: @book_1)
+    @review_12 = Review.create!(title: "review 12", rating: 1, description: "Book 1 review", user: @user_6, book: @book_1)
+    @review_1 = Review.create!(title: "review 1", rating: 2, description: "Book 1 review", user: @user_4, book: @book_1)
+    @review_10 = Review.create!(title: "review 10", rating: 5, description: "Book 1 review", user: @user_1, book: @book_1)
+    @review_3 = Review.create!(title: "review 3", rating: 1, description: "Book 1 review", user: @user_5, book: @book_1)
+    @review_11 = Review.create!(title: "review 11", rating: 3, description: "Book 1 review", user: @user_3, book: @book_1)
   end
+
   describe "When I visit show page" do
     it "I see title, author/s page number, year published, cover image" do
 
@@ -31,6 +37,7 @@ describe "Books Show page" do
       expect(page).to have_content("Page Number: #{@book_1.pages}")
       expect(page).to have_xpath('//img[@src="https://iguhb7lay20b9vtl-zippykid.netdna-ssl.com/wp-content/uploads/2018/04/1_wswf9QNmKrwTB883hHb4BQ.png"]')
     end
+
     it "Shows all reviews for book, along with review info, title, user, rating(1-5), description" do
 
       visit book_path(@book_1)
@@ -40,6 +47,53 @@ describe "Books Show page" do
         expect(page).to have_content(@review_1.rating)
         expect(page).to have_content(@review_1.description)
         expect(page).to have_content(@user_1.name)
+      end
+    end
+    it "I see an area on the page for statistics about reviews:
+        the top three reviews for this book (title, rating and user only)" do
+
+      visit book_path(@book_1)
+
+      within("#top_3_reviews_#{@book_1.id}") do
+        expect(page).to have_content(@review_10.title)
+        expect(page).to have_content(@review_10.rating)
+        expect(page).to have_content(@user_1.name)
+
+        expect(page).to have_content(@review_2.title)
+        expect(page).to have_content(@review_2.rating)
+        expect(page).to have_content(@user_2.name)
+
+        expect(page).to have_content(@review_11.title)
+        expect(page).to have_content(@review_11.rating)
+        expect(page).to have_content(@user_3.name)
+      end
+    end
+    it "show the bottom three reviews for this book (title, rating and user only)" do
+
+      visit book_path(@book_1)
+
+      within("#bottom_3_reviews_#{@book_1.id}") do
+
+        expect(page).to have_content(@review_3.title)
+        expect(page).to have_content(@review_3.rating)
+        expect(page).to have_content(@user_5.name)
+
+        expect(page).to have_content(@review_1.title)
+        expect(page).to have_content(@review_1.rating)
+        expect(page).to have_content(@user_4.name)
+
+        expect(page).to have_content(@review_12.title)
+        expect(page).to have_content(@review_12.rating)
+        expect(page).to have_content(@user_6.name)
+      end
+    end
+
+      it "shows the overall average rating of the reviews for this book" do
+
+        visit book_path(@book_1)
+
+        within("#average_rating_#{@book_1.id}") do
+          expect(page).to have_content(@book_1.avg_rating)
       end
     end
   end

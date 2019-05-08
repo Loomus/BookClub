@@ -14,10 +14,16 @@ RSpec.describe "Book index page" do
     @user_1 = User.create!(name: "John")
     @user_2 = User.create!(name: "Bill")
     @user_3 = User.create!(name: "Larry")
+    @user_4 = User.create!(name: "Stella")
+    @user_5 = User.create!(name: "Sarah")
+    @user_6 = User.create!(name: "Kristin")
 
-    @review_1 = Review.create!(title: "review 1", rating: 2, description: "Book 1 review", user: @user_1, book: @book_1)
-    @review_2 = Review.create!(title: "review 2", rating: 2, description: "Book 1 review", user: @user_2, book: @book_1)
-    @review_3 = Review.create!(title: "review 3", rating: 2, description: "Book 1 review", user: @user_3, book: @book_1)
+    @review_1 = Review.create!(title: "review 1", rating: 3, description: "Book 1 review", user: @user_1, book: @book_1)
+    @review_2 = Review.create!(title: "review 2", rating: 3, description: "Book 1 review", user: @user_2, book: @book_1)
+    @review_3 = Review.create!(title: "review 3", rating: 3, description: "Book 1 review", user: @user_3, book: @book_1)
+    @review_10 = Review.create!(title: "review 10", rating: 1, description: "Book 1 review", user: @user_4, book: @book_1)
+    @review_11 = Review.create!(title: "review 11", rating: 1, description: "Book 1 review", user: @user_5, book: @book_1)
+    @review_12 = Review.create!(title: "review 12", rating: 1, description: "Book 1 review", user: @user_6, book: @book_1)
 
     @review_4 = Review.create!(title: "review 4", rating: 3, description: "Book 1 review", user: @user_1, book: @book_2)
     @review_5 = Review.create!(title: "review 5", rating: 4, description: "Book 1 review", user: @user_2, book: @book_2)
@@ -63,7 +69,7 @@ RSpec.describe "Book index page" do
 
       within("#book-rev-stat-#{@book_1.id}") do
         expect(page).to have_content("Average Rating: 2.0")
-        expect(page).to have_content("Total Reviews: 3")
+        expect(page).to have_content("Total Reviews: 6")
       end
       within("#book-rev-stat-#{@book_2.id}") do
         expect(page).to have_content("Average Rating: 3.3")
@@ -88,23 +94,5 @@ RSpec.describe "Book index page" do
         click_link @book_3.title
       end
       expect(current_path).to eq(book_path(@book_3))
-  end
-
-  xit "Shows a link to sort books by rating" do
-    visit books_path
-
-    within("#sorting") do
-      expect(page).to have_link("Average Rating Ascending")
-      expect(page).to have_link("Average Rating Descending")
-    end
-
-    within("#sorting") do
-      click_link "Average Rating Ascending"
-    end
-    expect(current_path).to eq(books_path)
-    expect(page.all('li')[0]).to have_content(@book_1.title)
-    expect(page.all('li')[1]).to have_content(@book_3.title)
-    expect(page.all('li')[2]).to have_content(@book_2.title)
-
   end
 end

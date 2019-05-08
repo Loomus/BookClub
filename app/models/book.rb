@@ -16,7 +16,11 @@ class Book < ApplicationRecord
     reviews.count
   end
 
-  def self.sort_rating(order)
-    joins(:reviews).select("AVG(reviews.rating) AS book_review").group(:id).order(book_review: "#{order}")
+  def top_3_reviews
+    reviews.order(rating: :desc).limit(3)
+  end
+
+  def bottom_3_reviews
+    reviews.order(:rating).limit(3)
   end
 end
