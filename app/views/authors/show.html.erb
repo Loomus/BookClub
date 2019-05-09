@@ -2,9 +2,14 @@
 
 <div id="author-book-info">
   <% @author.books.each do |book| %>
-  <ul>
+  <ul id="book-<%= book.id %>">
     <li>
     <%= book.title %>
+    </li>
+      <%= book.top_review.first.title %>
+      <p><%= book.top_review.first.rating %></p>
+      <p><%= book.top_review.first.user.name %></p>
+    <li>
     </li>
       <img class="img-thumbnail" src="<%= book.cover_image %>">
     <li>
