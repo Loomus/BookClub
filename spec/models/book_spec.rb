@@ -66,7 +66,15 @@ describe Book do
     it ".bottom_3_reviews" do
 
       expect(@book_1.bottom_3_reviews).to eq([@review_12,@review_3,@review_1])
-  end
+    end
+
+      expect(@book_1.bottom_3_reviews).to eq([@review_3,@review_12,@review_1])
+    end
+    it ".top_review" do
+
+      expect(@book_1.top_review).to eq([@review_10])
+    end
+  
   describe "Class Methods" do
     it ".sort_rating" do
       @books = Book.all
@@ -100,11 +108,13 @@ describe Book do
 
         expect(@books.lowest_rated).to eq([@book_1, @book_3, @book_2])
       end
-      # it "most_reviews" do
-      #   @books = Book.all
-      #
-      #   expect(@books.most_reviews).to eq([@user_2, @user_3, @user_1])
-      # end
+
+      xit "most_reviews" do
+        @books = Book.all
+
+        expect(@books.most_reviews).to eq([@user_2, @user_3, @user_1])
+      end
+
     end
   end
 end
