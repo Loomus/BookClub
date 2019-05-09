@@ -12,6 +12,7 @@ class BooksController < ApplicationController
     end
     @highest_rated = Book.highest_rated
     @lowest_rated = Book.lowest_rated
+    @top_users = User.most_reviews
   end
 
   def show
