@@ -1,0 +1,14 @@
+<h1><%= @user.name %>Show Page</<h1>
+  <section>
+    <h2><%= @user.name %>'s Reviews</h2>
+    <ul>
+      <% @user.reviews.each do |review| %>
+      <li><%= review.book.title %></li>
+      <li><img class="review_img" src="<%= review.book.cover_image %>"></li>
+      <li><%= review.title %></li>
+      <li><%= review.rating %></li>
+      <li><%= review.description %></li>
+      <li><%= review.created_at %></li>
+      <% end %>
+    </ul>
+  </section>
