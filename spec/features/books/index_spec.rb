@@ -62,7 +62,7 @@ RSpec.describe "Book index page" do
     end
   end
 
-  describe "When I visit /books"
+  describe "When I visit /books" do
     it "Displays title, page number, year published, cover_image, and author/authors who wrote the book" do
 
       visit books_path
@@ -427,7 +427,6 @@ RSpec.describe "Book index page" do
           expect(page).to have_content(@author_5.name)
           expect(page.all('li')[28]).to have_content("Average Rating: 5")
           expect(page.all('li')[29]).to have_content("Total Reviews: 1")
-
         end
       end
       it "page is sorted by books with least number of reviews" do
@@ -491,7 +490,7 @@ RSpec.describe "Book index page" do
     end
   end
   describe "Statistics section" do
-    xit "shows three highest rated books" do
+    it "shows three highest rated books" do
 
       visit books_path
 
@@ -519,6 +518,7 @@ RSpec.describe "Book index page" do
           expect(page.all('li')[3]).to have_content("Total Reviews: 5")
           expect(page.all('li')[4]).to have_content(@user_3.name)
           expect(page.all('li')[5]).to have_content("Total Reviews: 4")
+          end
         end
       end
     end

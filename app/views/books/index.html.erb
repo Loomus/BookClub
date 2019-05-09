@@ -30,6 +30,16 @@
     </li>
     <% end %>
     </ul>
+  <ul id="most-reviews">
+    <% @top_users.each do |user| %>
+    <li>
+      <%= user.name %>
+    </li>
+    <li>
+      Total Reviews: <%= user.reviews.count %>
+    </li>
+    <% end %>
+    </ul>
   </section>
 
 <div id="books">

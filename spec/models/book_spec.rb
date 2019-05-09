@@ -108,11 +108,16 @@ describe Book do
 
         expect(@books.lowest_rated).to eq([@book_1, @book_3, @book_2])
       end
+      it ".most_reviews" do
+        book = Book.create!(title: "whatever", pages: 200, year: 1990, cover_image: "www.google.com")
+        book_2 = Book.create!(title: "whatever", pages: 200, year: 1990, cover_image: "www.google.com")
+        book_3 = Book.create!(title: "whatever", pages: 200, year: 1990, cover_image: "www.google.com")
 
-      xit "most_reviews" do
-        @books = Book.all
+        review = Review.create!(title: "new rev 1", rating: 3, description: "adkjsfalkjsdf", user: @user_3, book: book )
+        review_2 = Review.create!(title: "new rev 2", rating: 3, description: "adkjsfalkjsdf", user: @user_3, book: book_2)
+        review_3 = Review.create!(title: "new rev 2", rating: 3, description: "adkjsfalkjsdf", user: @user_1, book: book)
 
-        expect(@books.most_reviews).to eq([@user_2, @user_3, @user_1])
+        expect(@books.most_reviews).to eq([@user_3, @user_1, @user_2])
       end
 
     end
