@@ -27,6 +27,10 @@ class Book < ApplicationRecord
     reviews.order(:rating).limit(3)
   end
 
+  def top_review
+    reviews.order(rating: :desc).limit(1)
+  end
+
   def self.avg_rating_order(order)
     joins(:reviews)
     .group(:id)
