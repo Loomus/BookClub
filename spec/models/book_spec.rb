@@ -38,6 +38,8 @@ describe Book do
   describe "Relationships" do
     it { should have_many :book_authors }
     it { should have_many(:authors).through(:book_authors)}
+    it { should have_many :reviews }
+    it { should have_many(:users).through(:reviews)}
   end
   describe "Validations" do
     it { should validate_presence_of :title }
@@ -64,7 +66,7 @@ describe Book do
     end
     it ".bottom_3_reviews" do
 
-      expect(@book_1.bottom_3_reviews).to eq([@review_12,@review_3,@review_1])
+      expect(@book_1.bottom_3_reviews).to eq([@review_3,@review_12,@review_1])
   end
   describe "Class Methods" do
     it ".sort_rating" do
@@ -88,6 +90,21 @@ describe Book do
 
       expect(@books.sort_reviews(:desc)).to eq([@book_1, @book_2, @book_3])
       expect(@books.sort_reviews(:asc)).to eq([@book_3, @book_2, @book_1])
+      end
+      it ".highest_rated" do
+        @books = Book.all
+
+        expect(@books.highest_rated).to eq([@book_2, @book_3, @book_1])
+      end
+      it ".lowest_rated" do
+        @books = Book.all
+
+        expect(@books.lowest_rated).to eq([@book_1, @book_3, @book_2])
+      end
+      it "most_reviews" do
+        @books = Book.all
+
+        expect(@books.most_reviews).to eq([@user_2, @user_3, @user_1])
       end
     end
   end

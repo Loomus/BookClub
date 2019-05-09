@@ -487,19 +487,28 @@ RSpec.describe "Book index page" do
 
       within("#book-statistics") do
         within("#highest-rated") do
-          expect(page.all('li')[0]).to have_content()
-          expect(page.all('li')[1]).to have_content()
-          expect(page.all('li')[2]).to have_content()
+          expect(page.all('li')[0]).to have_content(@book_4.title)
+          expect(page.all('li')[1]).to have_content("Average Rating: 5.0")
+          expect(page.all('li')[2]).to have_content(@book_6.title)
+          expect(page.all('li')[3]).to have_content("Average Rating: 4.6")
+          expect(page.all('li')[4]).to have_content(@book_2.title)
+          expect(page.all('li')[5]).to have_content("Average Rating: 4.5")
         end
         within("#worst-rated") do
-          expect(page.all('li')[0]).to have_content()
-          expect(page.all('li')[1]).to have_content()
-          expect(page.all('li')[2]).to have_content()
+          expect(page.all('li')[0]).to have_content(@book_1.title)
+          expect(page.all('li')[1]).to have_content("Average Rating: 2.0")
+          expect(page.all('li')[2]).to have_content(@book_3.title)
+          expect(page.all('li')[3]).to have_content("Average Rating: 3.0")
+          expect(page.all('li')[4]).to have_content(@book_5.title)
+          expect(page.all('li')[5]).to have_content("Average Rating: 3.8")
         end
         within("#most-reviews") do
-          expect(page.all('li')[0]).to have_content()
-          expect(page.all('li')[1]).to have_content()
-          expect(page.all('li')[2]).to have_content()
+          expect(page.all('li')[0]).to have_content(@user_1.name)
+          expect(page.all('li')[1]).to have_content("Total Reviews: 6")
+          expect(page.all('li')[2]).to have_content(@user_2.name)
+          expect(page.all('li')[3]).to have_content("Total Reviews: 5")
+          expect(page.all('li')[4]).to have_content(@user_3.name)
+          expect(page.all('li')[5]).to have_content("Total Reviews: 4")
         end
       end
     end

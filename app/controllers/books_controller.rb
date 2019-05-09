@@ -10,6 +10,8 @@ class BooksController < ApplicationController
     else
       @books = Book.all
     end
+    @highest_rated = Book.highest_rated
+    @lowest_rated = Book.lowest_rated
   end
 
   def show

@@ -9,6 +9,29 @@
   <%= link_to "Least Reviewed", books_path(sort: :reviews, order: :asc) %>
 </nav>
 
+  <section id="book-statistics">
+    <ul id="highest-rated">
+    <% @highest_rated.each do |book| %>
+    <li>
+      <%= book.title %>
+    </li>
+    <li>
+      Average Rating: <%= book.avg_rating %>
+    </li>
+    <% end %>
+  </ul>
+  <ul id="worst-rated">
+    <% @lowest_rated.each do |book| %>
+    <li>
+      <%= book.title %>
+    </li>
+    <li>
+      Average Rating: <%= book.avg_rating %>
+    </li>
+    <% end %>
+    </ul>
+  </section>
+
 <div id="books">
    <% @books.each do |book| %>
   <ul id="book-info-<%= book.id %>">
