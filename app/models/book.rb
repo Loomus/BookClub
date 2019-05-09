@@ -2,6 +2,7 @@ class Book < ApplicationRecord
   has_many :book_authors
   has_many :authors, through: :book_authors
   has_many :reviews
+  has_many :users, through: :reviews
 
   validates_presence_of :title
   validates_presence_of :pages
@@ -9,7 +10,9 @@ class Book < ApplicationRecord
   validates_presence_of :cover_image
 
   def avg_rating
-    reviews.average(:rating)
+    if reviews.any?
+    reviews.average(:rating).round(1)
+    end
   end
 
   def review_count
@@ -23,7 +26,7 @@ class Book < ApplicationRecord
   def bottom_3_reviews
     reviews.order(:rating).limit(3)
   end
-    
+
   def self.avg_rating_order(order)
     joins(:reviews)
     .group(:id)
@@ -39,4 +42,22 @@ class Book < ApplicationRecord
     .group(:id)
     .order("(reviews.count) #{order}")
   end
+
+  def self.highest_rated
+    joins(:reviews)
+    .group(:id)
+    .order("avg(reviews.rating) desc")
+    .limit(3)
+  end
+
+  def self.lowest_rated
+    joins(:reviews)
+    .group(:id)
+    .order("avg(reviews.rating)")
+    .limit(3)
+  end
+
+  # def self.most_reviews
+  #   binding.pry
+  # end
 end
