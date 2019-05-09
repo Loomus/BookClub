@@ -483,7 +483,6 @@ RSpec.describe "Book index page" do
   describe "Statistics section" do
     xit "shows three highest rated books" do
 
-
       visit books_path
 
       within("#book-statistics") do

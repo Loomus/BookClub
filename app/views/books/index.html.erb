@@ -28,7 +28,7 @@
     </p>
     <% end %>
     <ul id="book-rev-stat-<%= book.id %>">
-      <li>Average Rating: <%= book.avg_rating.round(1) %></li>
+      <li>Average Rating: <%= book.avg_rating %></li>
       <li>Total Reviews: <%= book.review_count.to_i %></li>
     </ul>
 <% end %>

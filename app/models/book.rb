@@ -9,7 +9,9 @@ class Book < ApplicationRecord
   validates_presence_of :cover_image
 
   def avg_rating
-    reviews.average(:rating)
+    if reviews.any?
+    reviews.average(:rating).round(1)
+    end
   end
 
   def review_count
@@ -23,7 +25,7 @@ class Book < ApplicationRecord
   def bottom_3_reviews
     reviews.order(:rating).limit(3)
   end
-    
+
   def self.avg_rating_order(order)
     joins(:reviews)
     .group(:id)
