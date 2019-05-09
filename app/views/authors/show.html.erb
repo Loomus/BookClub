@@ -1,0 +1,25 @@
+<h1><%= @author.name %> Show Page</h1>
+
+<div id="author-book-info">
+  <% @author.books.each do |book| %>
+  <ul>
+    <li>
+    <%= book.title %>
+    </li>
+      <img class="img-thumbnail" src="<%= book.cover_image %>">
+    <li>
+    <%= book.year %>
+    </li>
+    <li>
+    <%= book.pages %>
+    </li>
+    <% book.authors.each do |author| %>
+    <% if author.name != @author.name %>
+    <li>
+    Co Authored by: <%= author.name %>
+    </li>
+    <% end %>
+    <% end %>
+  </ul>
+  <% end %>
+</div>
