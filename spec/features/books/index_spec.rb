@@ -52,6 +52,16 @@ RSpec.describe "Book index page" do
     @review_21 = Review.create!(title: "review 12", rating: 1, description: "Book 1 review", user: @user_6, book: @book_1)
   end
 
+  describe "As a visitor I see a navigation bar" do
+    it "It includes a links to the home page and a link to browse all books" do
+
+      visit books_path
+      expect(page).to have_link('Home')
+      expect(page).to have_link('Books')
+
+    end
+  end
+
   describe "When I visit /books"
     it "Displays title, page number, year published, cover_image, and author/authors who wrote the book" do
 
