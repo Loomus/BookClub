@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get '/', to: 'welcome#index'
 
-  resources :books, only: [:index, :show]
+  resources :books, only: [:index, :show, :new]
 
   resources :users, only: [:show]
 

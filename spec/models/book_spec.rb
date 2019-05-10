@@ -65,16 +65,13 @@ describe Book do
     end
     it ".bottom_3_reviews" do
 
-      expect(@book_1.bottom_3_reviews).to eq([@review_12,@review_3,@review_1])
-    end
-
       expect(@book_1.bottom_3_reviews).to eq([@review_3,@review_12,@review_1])
     end
     it ".top_review" do
 
       expect(@book_1.top_review).to eq([@review_10])
     end
-  
+
   describe "Class Methods" do
     it ".sort_rating" do
       @books = Book.all
@@ -109,6 +106,8 @@ describe Book do
         expect(@books.lowest_rated).to eq([@book_1, @book_3, @book_2])
       end
       it ".most_reviews" do
+        @books = Book.all
+
         book = Book.create!(title: "whatever", pages: 200, year: 1990, cover_image: "www.google.com")
         book_2 = Book.create!(title: "whatever", pages: 200, year: 1990, cover_image: "www.google.com")
         book_3 = Book.create!(title: "whatever", pages: 200, year: 1990, cover_image: "www.google.com")
@@ -119,7 +118,6 @@ describe Book do
 
         expect(@books.most_reviews).to eq([@user_3, @user_1, @user_2])
       end
-
     end
   end
 end
