@@ -520,6 +520,14 @@ RSpec.describe "Book index page" do
           expect(page.all('li')[5]).to have_content("Total Reviews: 4")
           end
         end
+        end
+        it "Shows a link to create a new book, I am redirected to a form" do
+
+          visit books_path
+
+          click_link "Add a Book"
+
+          expect(current_path).to eq(new_book_path)
       end
     end
   end

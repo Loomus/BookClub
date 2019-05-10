@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20190507174101) do
     t.string "title"
     t.integer "pages"
     t.integer "year"
-    t.string "cover_image"
+    t.string "cover_image", default: "https://ibf.org/site_assets/img/placeholder-book-cover-default.png"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
