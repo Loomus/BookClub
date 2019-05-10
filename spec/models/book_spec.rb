@@ -64,8 +64,25 @@ describe Book do
       expect(@book_1.top_3_reviews).to eq([@review_10,@review_2,@review_11])
     end
     it ".bottom_3_reviews" do
+      user_1 = User.create(name: "Jim")
+      user_2 = User.create(name: "Joe")
+      user_3 = User.create(name: "Jenna")
+      user_4 = User.create(name: "Megan")
+      user_5 = User.create(name: "Brian")
 
-      expect(@book_1.bottom_3_reviews).to eq([@review_3,@review_12,@review_1])
+      book_1 = Book.create(title: "Book 1 title", pages: 300, year: 1992, cover_image: "https://iguhb7lay20b9vtl-zippykid.netdna-ssl.com/wp-content/uploads/2018/04/1_wswf9QNmKrwTB883hHb4BQ.png")
+      book_2 = Book.create(title: "Book 2 title", pages: 350, year: 1986, cover_image: "https://images.penguinrandomhouse.com/cover/9781101931288")
+      book_3 = Book.create(title: "Book 3 title", pages: 125, year: 1942, cover_image: "https://s26162.pcdn.co/wp-content/uploads/2018/08/81Ya99Bc-jL.jpg")
+
+
+      review_1 = Review.create!(title: "new review 1" ,rating: 4 ,description: "blahhhhahha" ,user: user_1, book: book_1 )
+      review_2 = Review.create!(title: "new review 1" ,rating: 2 ,description: "blahhhhahha" ,user: user_2, book: book_1 )
+      review_3 = Review.create!(title: "new review 1" ,rating: 5 ,description: "blahhhhahha" ,user: user_3, book: book_1 )
+      review_4 = Review.create!(title: "new review 1" ,rating: 1 ,description: "blahhhhahha" ,user: user_4, book: book_1 )
+      review_5 = Review.create!(title: "new review 1" ,rating: 3 ,description: "blahhhhahha" ,user: user_5, book: book_1 )
+
+
+      expect(book_1.bottom_3_reviews).to eq([review_4, review_2, review_5])
     end
     it ".top_review" do
 
