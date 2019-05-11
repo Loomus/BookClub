@@ -26,3 +26,8 @@ end
 def split_authors
 
 end
+
+if User.find_by(name: user_name)
+@review = Review.create(review_params)
+@user = User.create(name: user_name)
+@user.reviews << @review
