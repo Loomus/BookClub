@@ -54,5 +54,19 @@ describe User do
 
     expect(@books.most_reviews).to eq([@user_3, @user_1, @user_2])
     end
+    it ".sort_review_date" do
+      @user = User.create!(name: "Billy")
+
+      book_1 = Book.create!(title: "Book 1", pages: 132, year: 1973, cover_image: "www.google.com")
+      book_2 = Book.create!(title: "Book 2", pages: 474, year: 1926, cover_image: "www.yahoo.com")
+      book_3 = Book.create!(title: "Book 3", pages: 892, year: 1983, cover_image: "www.askjeeves.com")
+
+      review_1 = Review.create!(title: "Book 1", rating: 3, description: "Review for Book 1", user: @user, book: book_1, created_at: 2.days.ago)
+      review_2 = Review.create!(title: "Book 2", rating: 4, description: "Review for Book 2", user: @user, book: book_2, created_at: 3.days.ago)
+      review_3 = Review.create!(title: "Book 3", rating: 1, description: "Review for Book 3", user: @user, book: book_3, created_at: 1.days.ago)
+
+      expect(@user.sort_review_date(:asc)).to eq([review_2, review_1, review_3])
+      expect(@user.sort_review_date(:desc)).to eq([review_3, review_1, review_2])
+    end
   end
 end

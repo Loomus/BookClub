@@ -1,14 +1,31 @@
 <h1><%= @user.name %>Show Page</<h1>
+  <section id="sort-links">
+    <%= link_to "Newest Reviews", user_path(@user, sort: :asc) %>
+    <%= link_to "Oldest Reviews", user_path(@user, sort: :desc) %>
+    </section>
   <section>
     <h2><%= @user.name %>'s Reviews</h2>
-    <ul>
+    <% if @sort_reviews == nil %>
+    <ul id="reviews">
       <% @user.reviews.each do |review| %>
       <li><%= review.book.title %></li>
       <li><img class="review_img" src="<%= review.book.cover_image %>"></li>
-      <li><%= review.title %></li>
+      <p><%= review.title %></p>
       <li><%= review.rating %></li>
       <li><%= review.description %></li>
-      <li><%= review.created_at %></li>
+      <p>Review created at: <%= review.created_at %></p>
       <% end %>
     </ul>
+    <% else %>
+    <ul id="reviews">
+      <% @sort_reviews.each do |review| %>
+      <li><%= review.book.title %></li>
+      <li><img class="review_img" src="<%= review.book.cover_image %>"></li>
+      <p><%= review.title %></p>
+      <li><%= review.rating %></li>
+      <li><%= review.description %></li>
+      <p>Review created at: <%= review.created_at %></p>
+      <% end %>
+    </ul>
+    <% end %>
   </section>
