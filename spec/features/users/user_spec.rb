@@ -51,18 +51,49 @@ describe User do
         expect(page).to have_content(@review_7.title)
 
       end
+
+      it "has links to sort reviews by oldest and newest" do
+        book_1 = Book.create!(title: "Book 1", pages: 132, year: 1973, cover_image: "www.google.com" )
+        book_2 = Book.create!(title: "Book 2", pages: 474, year: 1926, cover_image: "www.yahoo.com" )
+        book_3 = Book.create!(title: "Book 3", pages: 892, year: 1983, cover_image: "www.askjeeves.com" )
+
+        user = User.create!(name: "Billy")
+
+        review_1 = Review.create!(title: "Book 1", rating: 3, description: "Review for Book 1", user: user, book: book_1, created_at: 2.days.ago)
+        review_2 = Review.create!(title: "Book 2", rating: 4, description: "Review for Book 2", user: user, book: book_2, created_at: 3.days.ago)
+        review_3 = Review.create!(title: "Book 3", rating: 1, description: "Review for Book 3", user: user, book: book_3, created_at: 1.days.ago)
+
+        visit user_path(user)
+
+        within("#sort-links") do
+          click_link "Newest Reviews"
+        end
+
+        within("#reviews") do
+          expect(page.all("p")[0]).to have_content(review_2.title)
+          expect(page.all("p")[1]).to have_content("Review created at: #{review_2.created_at}")
+
+          expect(page.all("p")[2]).to have_content(review_1.title)
+          expect(page.all("p")[3]).to have_content("Review created at: #{review_1.created_at}")
+
+          expect(page.all("p")[4]).to have_content(review_3.title)
+          expect(page.all("p")[5]).to have_content("Review created at: #{review_3.created_at}")
+        end
+
+        within("#sort-links") do
+          click_link "Oldest Reviews"
+        end
+
+        within("#reviews") do
+          expect(page.all("p")[0]).to have_content(review_3.title)
+          expect(page.all("p")[1]).to have_content("Review created at: #{review_3.created_at}")
+
+          expect(page.all("p")[2]).to have_content(review_1.title)
+          expect(page.all("p")[3]).to have_content("Review created at: #{review_1.created_at}")
+
+          expect(page.all("p")[4]).to have_content(review_2.title)
+          expect(page.all("p")[5]).to have_content("Review created at: #{review_2.created_at}")
+        end
+      end
     end
   end
-
-# As a Visitor,
-# When I click on a user's name for any book review
-# I am taken to a show page for that user.
-# I should see all reviews that this
-# user has written.
-# Each review shows:
-# - the title of the review
-# - the description of the review
-# - the rating of the review
-# - the title of the book
-# - the thumbnail image for the book
-# - the date the review was written

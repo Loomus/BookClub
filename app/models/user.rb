@@ -6,4 +6,8 @@ class User < ApplicationRecord
   def self.most_reviews
     joins(:reviews).order("reviews.count desc").group(:id).limit(3)
   end
+
+  def sort_review_date(order)
+    reviews.order(created_at: :"#{order}")
+  end
 end
