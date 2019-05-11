@@ -1,4 +1,8 @@
 <h1><%= @book.title %> Show Page</h1>
+<section id="review-link">
+  <%= link_to "Add a Review", new_book_review_path(@book) %>
+
+</section>
 <section>
   <ul>
     <% @book.authors.each do |author| %>

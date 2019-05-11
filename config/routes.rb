@@ -3,10 +3,13 @@ Rails.application.routes.draw do
 
   get '/', to: 'welcome#index'
 
-  resources :books, only: [:index, :show, :new, :create]
+  resources :books, only: [:index, :show, :new, :create] do
+    resources :reviews, only: [:new, :index, :create]
+  end
 
   resources :users, only: [:show]
 
   resources :authors, only: [:show]
+
 
 end

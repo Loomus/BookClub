@@ -96,5 +96,40 @@ describe "Books Show page" do
           expect(page).to have_content(@book_1.avg_rating)
       end
     end
+
+    it "has a link for a review of that book" do
+
+      visit book_path(@book_1)
+
+      within("#review-link") do
+        click_link "Add a Review"
+      end
+
+      expect(current_path).to eq(new_book_review_path(@book_1))
+    end
   end
 end
+
+
+  #     As a Visitor,
+  # When I visit a book's show page
+  # I see a link to add a new review for this book.
+  # When I click on this link, I am taken to a new review path.
+  # On this new page, I see a form where I can enter:
+  # - a review title
+  # - a username as a string
+  # - a numeric rating that can only be a number from 1 to 5
+  # - some text for the review itself
+  # When the form is submitted, I should return to that book's
+  # show page and I should see my review text.
+  #
+  # User names should be converted to Title Case before saving.
+  # User names should be unique for that book (a user can leave only one review per book)
+  # Checklist:
+  #   base code tests are written
+  #   base code is written to pass tests
+  #   edge case ("sad path") tests written
+  #   edge case code written
+  #   code is reviewed
+  #   branch is merged
+  #   all tests still pass
