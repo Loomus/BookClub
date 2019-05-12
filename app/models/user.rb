@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  has_many :reviews
-  has_many :books, through: :reviews
+  has_many :reviews, dependent: :destroy
+  has_many :books, through: :reviews, dependent: :destroy
   validates_presence_of :name
 
   def self.most_reviews

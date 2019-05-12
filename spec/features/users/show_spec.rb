@@ -139,20 +139,7 @@ describe User do
           expect(page).to_not have_xpath('//img[@src="www.askjeeves.com"]')
           expect(page).to_not have_content(review_3.title)
           expect(page).to_not have_content(review_3.description)
-          expect(page).to_not have_content(review_3.rating)
           expect(page).to_not have_content(review_3.created_at)
         end
       end
     end
-
-
-
-
-  # User Story 18
-  # User can delete a book review
-  #
-  # As a Visitor,
-  # When I visit a user's show page,
-  # I see a link next to each review to delete the review.
-  # When I delete a review I am returned to the user's show page
-  # Then I should no longer see that review.

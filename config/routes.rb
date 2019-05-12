@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/', to: 'welcome#index'
 
   resources :books, only: [:index, :show, :new, :create] do
-    resources :reviews, only: [:new, :index, :create]
+    resources :reviews, only: [:new, :index, :create, :destroy]
   end
 
   resources :users, only: [:show]

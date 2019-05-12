@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   def show
     if params[:sort] == "asc"
     @user = User.find(params[:id])
