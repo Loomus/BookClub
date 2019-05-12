@@ -1,8 +1,8 @@
 class Book < ApplicationRecord
   has_many :book_authors
   has_many :authors, through: :book_authors
-  has_many :reviews
-  has_many :users, through: :reviews
+  has_many :reviews, dependent: :destroy
+  has_many :users, through: :reviews, dependent: :destroy
 
   validates_presence_of :title
   validates_presence_of :pages

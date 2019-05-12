@@ -23,6 +23,16 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def destroy
+    review = Review.find(params[:book_id])
+    user = User.find(params[:id])
+    book = Book.find(params[:format])
+    book.reviews.delete(review)
+    user.reviews.delete(review)
+    review.delete
+    redirect_to user_path(user)
+  end
+
   private
 
   def review_params
