@@ -14,7 +14,7 @@
       <li><%= review.rating %></li>
       <li><%= review.description %></li>
       <p>Review created at: <%= review.created_at %></p>
-      <%= link_to "Delete Review", book_review_path(review.id, review.user_id, review.book_id), method: :delete %>
+      <%= link_to "Delete Review", book_review_path(review.id, review.user_id), method: :delete %>
     </ul>
     <% end %>
     <% else %>
@@ -26,7 +26,7 @@
       <li><%= review.rating %></li>
       <li><%= review.description %></li>
       <p>Review created at: <%= review.created_at %></p>
-      <%= link_to "Delete Review", book_review_path(review.id, review.user_id, review.book_id), method: :delete %>
+      <%= link_to "Delete Review", book_review_path(review.id, review.user_id), method: :delete %>
     </ul>
     <% end %>
     <% end %>
