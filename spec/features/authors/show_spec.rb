@@ -37,18 +37,18 @@ describe "Author show page" do
       expect(page).to have_content(@kaufman.name)
 
       within("#author-book-info") do
-        expect(page).to have_content(@unearthed.title)
+        expect(page).to have_link(@unearthed.title)
         expect(page).to have_xpath('//img[@src="https://images.gr-assets.com/books/1495338003l/32941343.jpg"]')
         expect(page).to have_content(@unearthed.year)
         expect(page).to have_content(@unearthed.pages)
         expect(page).to have_content("Co Authored by: #{@spooner.name}")
 
-        expect(page).to have_content(@book_2.title)
+        expect(page).to have_link(@book_2.title)
         expect(page).to have_xpath('//img[@src="https://prodimage.images-bn.com/pimages/9780547928210_p0_v2_s550x406.jpg"]')
         expect(page).to have_content(@book_2.year)
         expect(page).to have_content(@book_2.pages)
 
-        expect(page).to have_content(@book_3.title)
+        expect(page).to have_link(@book_3.title)
         expect(page).to have_xpath('//img[@src="https://images-na.ssl-images-amazon.com/images/I/8167H8DUjnL.jpg"]')
         expect(page).to have_content(@book_3.year)
         expect(page).to have_content(@book_3.pages)
@@ -60,7 +60,7 @@ describe "Author show page" do
 
       within("#author-book-info") do
         within("#book-#{@unearthed.id}") do
-          expect(page).to have_content(@unearthed.title)
+          expect(page).to have_link(@unearthed.title)
           expect(page).to have_content(@review_un_2.title)
           expect(page).to have_content(@review_un_2.rating)
           expect(page).to have_content(@user_2.name)
@@ -68,7 +68,7 @@ describe "Author show page" do
       end
       within("#author-book-info") do
         within("#book-#{@book_2.id}") do
-          expect(page).to have_content(@book_2.title)
+          expect(page).to have_link(@book_2.title)
           expect(page).to have_content(@review_b2_2.title)
           expect(page).to have_content(@review_b2_2.rating)
           expect(page).to have_content(@user_2.name)
@@ -76,7 +76,7 @@ describe "Author show page" do
       end
       within("#author-book-info") do
         within("#book-#{@book_3.id}") do
-          expect(page).to have_content(@book_3.title)
+          expect(page).to have_link(@book_3.title)
           expect(page).to have_content(@review_b3_2.title)
           expect(page).to have_content(@review_b3_2.rating)
           expect(page).to have_content(@user_2.name)

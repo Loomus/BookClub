@@ -41,7 +41,7 @@ describe User do
         expect(page).to have_content(@user_1.name)
 
       within("#review-#{@review_10.id}") do
-        expect(page).to have_content(@book_1.title)
+        expect(page).to have_link(@book_1.title)
         expect(page).to have_xpath('//img[@src="https://iguhb7lay20b9vtl-zippykid.netdna-ssl.com/wp-content/uploads/2018/04/1_wswf9QNmKrwTB883hHb4BQ.png"]')
         expect(page).to have_content(@review_10.title)
         expect(page).to have_content(@review_10.description)
@@ -49,7 +49,7 @@ describe User do
         expect(page).to have_content(@review_10.created_at)
       end
       within("#review-#{@review_4.id}") do
-        expect(page).to have_content(@book_2.title)
+        expect(page).to have_link(@book_2.title)
         expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
         expect(page).to have_content(@review_4.title)
         expect(page).to have_content(@review_4.description)
@@ -57,7 +57,7 @@ describe User do
         expect(page).to have_content(@review_4.created_at)
       end
       within("#review-#{@review_7.id}") do
-        expect(page).to have_content(@book_3.title)
+        expect(page).to have_link(@book_3.title)
         expect(page).to have_xpath('//img[@src="https://s26162.pcdn.co/wp-content/uploads/2018/08/81Ya99Bc-jL.jpg"]')
         expect(page).to have_content(@review_7.title)
         expect(page).to have_content(@review_7.description)
