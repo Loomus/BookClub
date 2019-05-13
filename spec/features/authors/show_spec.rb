@@ -63,7 +63,7 @@ describe "Author show page" do
           expect(page).to have_link(@unearthed.title)
           expect(page).to have_content(@review_un_2.title)
           expect(page).to have_content(@review_un_2.rating)
-          expect(page).to have_content(@user_2.name)
+          expect(page).to have_link(@user_2.name)
         end
       end
       within("#author-book-info") do
@@ -71,7 +71,7 @@ describe "Author show page" do
           expect(page).to have_link(@book_2.title)
           expect(page).to have_content(@review_b2_2.title)
           expect(page).to have_content(@review_b2_2.rating)
-          expect(page).to have_content(@user_2.name)
+          expect(page).to have_link(@user_2.name)
         end
       end
       within("#author-book-info") do
@@ -79,7 +79,7 @@ describe "Author show page" do
           expect(page).to have_link(@book_3.title)
           expect(page).to have_content(@review_b3_2.title)
           expect(page).to have_content(@review_b3_2.rating)
-          expect(page).to have_content(@user_2.name)
+          expect(page).to have_link(@user_2.name)
         end
       end
     end

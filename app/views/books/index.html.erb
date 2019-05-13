@@ -34,7 +34,7 @@
   <ul id="most-reviews">
     <% @top_users.each do |user| %>
     <li>
-      <%= user.name %>
+      <%= link_to user.name, user_path(user) %>
     </li>
     <li>
       Total Reviews: <%= user.reviews.count %>

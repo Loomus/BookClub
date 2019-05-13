@@ -512,11 +512,11 @@ RSpec.describe "Book index page" do
           expect(page.all('li')[5]).to have_content("Average Rating: 3.8")
         end
         within("#most-reviews") do
-          expect(page.all('li')[0]).to have_content(@user_1.name)
+          expect(page.all('li')[0]).to have_link(@user_1.name)
           expect(page.all('li')[1]).to have_content("Total Reviews: 6")
-          expect(page.all('li')[2]).to have_content(@user_2.name)
+          expect(page.all('li')[2]).to have_link(@user_2.name)
           expect(page.all('li')[3]).to have_content("Total Reviews: 5")
-          expect(page.all('li')[4]).to have_content(@user_3.name)
+          expect(page.all('li')[4]).to have_link(@user_3.name)
           expect(page.all('li')[5]).to have_content("Total Reviews: 4")
           end
         end
