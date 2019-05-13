@@ -54,5 +54,4 @@ private
   def author_params
     params.require(:book).permit(:authors)
   end
-
 end

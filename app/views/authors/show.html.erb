@@ -1,14 +1,18 @@
 <h1><%= @author.name %> Show Page</h1>
-
+<h2 id="delete"><%= link_to "Delete Author", author_path(@author), method: :delete %></h2>
 <div id="author-book-info">
   <% @author.books.each do |book| %>
   <ul id="book-<%= book.id %>">
     <li>
     <%= link_to book.title, book_path(book) %>
     </li>
+      <% if book.reviews.count == 0 %>
+      <li>No reviews found</li>
+      <% else %>
       <%= book.top_review.first.title %>
       <p><%= book.top_review.first.rating %></p>
       <p><%= link_to book.top_review.first.user.name, user_path(book.top_review.first.user) %></p>
+      <% end %>
     <li>
     </li>
       <img class="img-thumbnail" src="<%= book.cover_image %>">
