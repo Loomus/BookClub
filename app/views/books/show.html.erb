@@ -1,4 +1,4 @@
-<h1><%= link_to @book.title, book_path(@book) %> Show Page</h1>
+<h1><%= @book.title %> Show Page</h1>
 <section id="review-link">
   <%= link_to "Add a Review", new_book_review_path(@book) %>
 
@@ -18,7 +18,7 @@
     <li><%= review.title %></li>
     <li><%= review.rating %></li>
     <li><%= review.description %></li>
-    <li><%= review.user.name %></li>
+    <li><%= link_to review.user.name, user_path(review.user) %></li>
     <% end %>
   </ul>
 </section>
@@ -29,7 +29,7 @@
     <% @book.top_3_reviews.each do |review| %>
     <li><%= review.title %></li>
     <li><%= review.rating  %></li>
-    <li><%= review.user.name %></li>
+    <li><%= link_to review.user.name, user_path(review.user) %></li>
     <% end %>
   </ul>
 </section>
@@ -39,7 +39,7 @@
     <% @book.bottom_3_reviews.each do |review| %>
     <li><%= review.title %></li>
     <li><%= review.rating %></li>
-    <li><%= review.user.name %></li>
+    <li><%= link_to review.user.name, user_path(review.user) %></li>
     <% end %>
   </ul>
 </section>

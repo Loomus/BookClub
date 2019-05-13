@@ -8,7 +8,7 @@
     </li>
       <%= book.top_review.first.title %>
       <p><%= book.top_review.first.rating %></p>
-      <p><%= book.top_review.first.user.name %></p>
+      <p><%= link_to book.top_review.first.user.name, user_path(book.top_review.first.user) %></p>
     <li>
     </li>
       <img class="img-thumbnail" src="<%= book.cover_image %>">

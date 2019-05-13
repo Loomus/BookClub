@@ -32,7 +32,7 @@ describe "Books Show page" do
       visit book_path(@book_1)
 
       expect(page).to have_content("#{@book_1.title} Show Page")
-      expect(page).to have_link(@book_1.title)
+      expect(page).to have_content(@book_1.title)
       expect(page).to have_content(@author_1.name)
       expect(page).to have_content(@author_2.name)
       expect(page).to have_content("Page Number: #{@book_1.pages}")
@@ -47,7 +47,7 @@ describe "Books Show page" do
         expect(page).to have_content(@review_1.title)
         expect(page).to have_content(@review_1.rating)
         expect(page).to have_content(@review_1.description)
-        expect(page).to have_content(@user_1.name)
+        expect(page).to have_link(@user_1.name)
       end
     end
     it "I see an area on the page for statistics about reviews:
@@ -58,15 +58,15 @@ describe "Books Show page" do
       within("#top_3_reviews_#{@book_1.id}") do
         expect(page).to have_content(@review_10.title)
         expect(page).to have_content(@review_10.rating)
-        expect(page).to have_content(@user_1.name)
+        expect(page).to have_link(@user_1.name)
 
         expect(page).to have_content(@review_2.title)
         expect(page).to have_content(@review_2.rating)
-        expect(page).to have_content(@user_2.name)
+        expect(page).to have_link(@user_2.name)
 
         expect(page).to have_content(@review_11.title)
         expect(page).to have_content(@review_11.rating)
-        expect(page).to have_content(@user_3.name)
+        expect(page).to have_link(@user_3.name)
       end
     end
     it "show the bottom three reviews for this book (title, rating and user only)" do
@@ -77,15 +77,15 @@ describe "Books Show page" do
 
         expect(page).to have_content(@review_3.title)
         expect(page).to have_content(@review_3.rating)
-        expect(page).to have_content(@user_5.name)
+        expect(page).to have_link(@user_5.name)
 
         expect(page).to have_content(@review_1.title)
         expect(page).to have_content(@review_1.rating)
-        expect(page).to have_content(@user_4.name)
+        expect(page).to have_link(@user_4.name)
 
         expect(page).to have_content(@review_12.title)
         expect(page).to have_content(@review_12.rating)
-        expect(page).to have_content(@user_6.name)
+        expect(page).to have_link(@user_6.name)
       end
     end
 
