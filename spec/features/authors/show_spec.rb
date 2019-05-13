@@ -83,5 +83,43 @@ describe "Author show page" do
         end
       end
     end
+    it "User can delete an author from author show page" do
+      author = Author.create!(name: "Jimmy")
+      book_1 = author.books.create!(title: "Book 1 for delete author", pages: 888, year: 1978, cover_image: "www.google.com")
+      book_2 = author.books.create!(title: "Book 2 for delete author", pages: 885, year: 1979, cover_image: "www.yahoo.com")
+
+      visit author_path(author)
+
+      within("#delete") do
+        click_link "Delete Author"
+      end
+      expect(current_path).to eq(books_path)
+      expect(page).to_not have_content(author.name)
+    end
   end
 end
+# As a Visitor,
+# When I visit an author's show page,
+# I see a link on the page to delete the author.
+# This link should return me to the book index page where I
+# no longer see this author listed.
+# If this author was the only author for any book, that book is also deleted.
+# If this author co-authored a book with someone else, that book should also be deleted, but not the other author.
+#
+# (you may need to delete other content before you can delete an author or book)
+# DO THESE STORIES FIRST:
+#
+# User Story 14, Author Show Page
+# Checklist:
+#   base code tests are written
+#   base code is written to pass tests
+#   edge case ("sad path") tests written
+#   edge case code written
+#   code is reviewed
+#   branch is merged
+#   all tests still pass
+# child of #9
+#
+# child of #33
+#
+# depends on #14

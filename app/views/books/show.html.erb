@@ -6,7 +6,7 @@
 <section>
   <ul>
     <% @book.authors.each do |author| %>
-      <li><%= author.name %></li>
+      <li><%= link_to author.name, author_path(author) %></li>
       <% end %>
       <li>Page Number: <%= @book.pages %></li>
       <li><img class="img-thumbnail" src="<%= @book.cover_image %>"></li>
