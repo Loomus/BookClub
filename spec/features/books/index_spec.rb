@@ -72,22 +72,22 @@ RSpec.describe "Book index page" do
       expect(page).to have_content(@book_1.pages)
       expect(page).to have_content(@book_1.year)
       expect(page).to have_xpath('//img[@src="https://iguhb7lay20b9vtl-zippykid.netdna-ssl.com/wp-content/uploads/2018/04/1_wswf9QNmKrwTB883hHb4BQ.png"]')
-      expect(page).to have_content(@author_1.name)
-      expect(page).to have_content(@author_2.name)
+      expect(page).to have_link(@author_1.name)
+      expect(page).to have_link(@author_2.name)
       end
       within("#book-info-#{@book_2.id}") do
       expect(page).to have_link(@book_2.title)
       expect(page).to have_content(@book_2.pages)
       expect(page).to have_content(@book_2.year)
       expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
-      expect(page).to have_content(@author_3.name)
+      expect(page).to have_link(@author_3.name)
       end
       within("#book-info-#{@book_3.id}") do
       expect(page).to have_link(@book_3.title)
       expect(page).to have_content(@book_3.pages)
       expect(page).to have_content(@book_3.year)
       expect(page).to have_xpath('//img[@src="https://s26162.pcdn.co/wp-content/uploads/2018/08/81Ya99Bc-jL.jpg"]')
-      expect(page).to have_content(@author_4.name)
+      expect(page).to have_link(@author_4.name)
       end
     end
     it "Next to each book title, I see its average book rating, and total number of reviews" do
@@ -141,7 +141,7 @@ RSpec.describe "Book index page" do
     expect(page.all('li')[1]).to have_content(@book_4.pages)
     expect(page.all('li')[2]).to have_content(@book_4.year)
     expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
-    expect(page).to have_content(@author_5.name)
+    expect(page).to have_link(@author_5.name)
     expect(page.all('li')[3]).to have_content("Average Rating: 5")
     expect(page.all('li')[4]).to have_content("Total Reviews: 1")
 
@@ -149,7 +149,7 @@ RSpec.describe "Book index page" do
     expect(page.all('li')[6]).to have_content(@book_6.pages)
     expect(page.all('li')[7]).to have_content(@book_6.year)
     expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
-    expect(page).to have_content(@author_7.name)
+    expect(page).to have_link(@author_7.name)
     expect(page.all('li')[8]).to have_content("Average Rating: 4.6")
     expect(page.all('li')[9]).to have_content("Total Reviews: 5")
 
@@ -157,7 +157,7 @@ RSpec.describe "Book index page" do
     expect(page.all('li')[11]).to have_content(@book_2.pages)
     expect(page.all('li')[12]).to have_content(@book_2.year)
     expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
-    expect(page).to have_content(@author_3.name)
+    expect(page).to have_link(@author_3.name)
     expect(page.all('li')[13]).to have_content("Average Rating: 4.5")
     expect(page.all('li')[14]).to have_content("Total Reviews: 2")
 
@@ -165,7 +165,7 @@ RSpec.describe "Book index page" do
     expect(page.all('li')[16]).to have_content(@book_5.pages)
     expect(page.all('li')[17]).to have_content(@book_5.year)
     expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
-    expect(page).to have_content(@author_6.name)
+    expect(page).to have_link(@author_6.name)
     expect(page.all('li')[18]).to have_content("Average Rating: 3.8")
     expect(page.all('li')[19]).to have_content("Total Reviews: 4")
 
@@ -173,7 +173,7 @@ RSpec.describe "Book index page" do
     expect(page.all('li')[21]).to have_content(@book_3.pages)
     expect(page.all('li')[22]).to have_content(@book_3.year)
     expect(page).to have_xpath('//img[@src="https://s26162.pcdn.co/wp-content/uploads/2018/08/81Ya99Bc-jL.jpg"]')
-    expect(page).to have_content(@author_4.name)
+    expect(page).to have_link(@author_4.name)
     expect(page.all('li')[23]).to have_content("Average Rating: 3.0")
     expect(page.all('li')[24]).to have_content("Total Reviews: 3")
 
@@ -181,8 +181,8 @@ RSpec.describe "Book index page" do
     expect(page.all('li')[26]).to have_content(@book_1.pages)
     expect(page.all('li')[27]).to have_content(@book_1.year)
     expect(page).to have_xpath('//img[@src="https://iguhb7lay20b9vtl-zippykid.netdna-ssl.com/wp-content/uploads/2018/04/1_wswf9QNmKrwTB883hHb4BQ.png"]')
-    expect(page).to have_content(@author_1.name)
-    expect(page).to have_content(@author_2.name)
+    expect(page).to have_link(@author_1.name)
+    expect(page).to have_link(@author_2.name)
     expect(page.all('li')[28]).to have_content("Average Rating: 2.0")
     expect(page.all('li')[29]).to have_content("Total Reviews: 6")
     end
@@ -201,8 +201,8 @@ RSpec.describe "Book index page" do
         expect(page.all('li')[1]).to have_content(@book_1.pages)
         expect(page.all('li')[2]).to have_content(@book_1.year)
         expect(page).to have_xpath('//img[@src="https://iguhb7lay20b9vtl-zippykid.netdna-ssl.com/wp-content/uploads/2018/04/1_wswf9QNmKrwTB883hHb4BQ.png"]')
-        expect(page).to have_content(@author_1.name)
-        expect(page).to have_content(@author_2.name)
+        expect(page).to have_link(@author_1.name)
+        expect(page).to have_link(@author_2.name)
         expect(page.all('li')[3]).to have_content("Average Rating: 2.0")
         expect(page.all('li')[4]).to have_content("Total Reviews: 6")
 
@@ -210,7 +210,7 @@ RSpec.describe "Book index page" do
         expect(page.all('li')[6]).to have_content(@book_3.pages)
         expect(page.all('li')[7]).to have_content(@book_3.year)
         expect(page).to have_xpath('//img[@src="https://s26162.pcdn.co/wp-content/uploads/2018/08/81Ya99Bc-jL.jpg"]')
-        expect(page).to have_content(@author_4.name)
+        expect(page).to have_link(@author_4.name)
         expect(page.all('li')[8]).to have_content("Average Rating: 3.0")
         expect(page.all('li')[9]).to have_content("Total Reviews: 3")
 
@@ -218,7 +218,7 @@ RSpec.describe "Book index page" do
         expect(page.all('li')[11]).to have_content(@book_5.pages)
         expect(page.all('li')[12]).to have_content(@book_5.year)
         expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
-        expect(page).to have_content(@author_6.name)
+        expect(page).to have_link(@author_6.name)
         expect(page.all('li')[13]).to have_content("Average Rating: 3.8")
         expect(page.all('li')[14]).to have_content("Total Reviews: 4")
 
@@ -226,7 +226,7 @@ RSpec.describe "Book index page" do
         expect(page.all('li')[16]).to have_content(@book_2.pages)
         expect(page.all('li')[17]).to have_content(@book_2.year)
         expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
-        expect(page).to have_content(@author_3.name)
+        expect(page).to have_link(@author_3.name)
         expect(page.all('li')[18]).to have_content("Average Rating: 4.5")
         expect(page.all('li')[19]).to have_content("Total Reviews: 2")
 
@@ -234,7 +234,7 @@ RSpec.describe "Book index page" do
         expect(page.all('li')[21]).to have_content(@book_6.pages)
         expect(page.all('li')[22]).to have_content(@book_6.year)
         expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
-        expect(page).to have_content(@author_7.name)
+        expect(page).to have_link(@author_7.name)
         expect(page.all('li')[23]).to have_content("Average Rating: 4.6")
         expect(page.all('li')[24]).to have_content("Total Reviews: 5")
 
@@ -242,7 +242,7 @@ RSpec.describe "Book index page" do
         expect(page.all('li')[26]).to have_content(@book_4.pages)
         expect(page.all('li')[27]).to have_content(@book_4.year)
         expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
-        expect(page).to have_content(@author_5.name)
+        expect(page).to have_link(@author_5.name)
         expect(page.all('li')[28]).to have_content("Average Rating: 5")
         expect(page.all('li')[29]).to have_content("Total Reviews: 1")
     end
@@ -261,7 +261,7 @@ RSpec.describe "Book index page" do
       expect(page.all('li')[1]).to have_content(@book_6.pages)
       expect(page.all('li')[2]).to have_content(@book_6.year)
       expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
-      expect(page).to have_content(@author_7.name)
+      expect(page).to have_link(@author_7.name)
       expect(page.all('li')[3]).to have_content("Average Rating: 4.6")
       expect(page.all('li')[4]).to have_content("Total Reviews: 5")
 
@@ -269,7 +269,7 @@ RSpec.describe "Book index page" do
       expect(page.all('li')[6]).to have_content(@book_2.pages)
       expect(page.all('li')[7]).to have_content(@book_2.year)
       expect(page).to have_xpath('//img[@src="https://iguhb7lay20b9vtl-zippykid.netdna-ssl.com/wp-content/uploads/2018/04/1_wswf9QNmKrwTB883hHb4BQ.png"]')
-      expect(page).to have_content(@author_3.name)
+      expect(page).to have_link(@author_3.name)
       expect(page.all('li')[8]).to have_content("Average Rating: 4.5")
       expect(page.all('li')[9]).to have_content("Total Reviews: 2")
 
@@ -277,8 +277,8 @@ RSpec.describe "Book index page" do
       expect(page.all('li')[11]).to have_content(@book_1.pages)
       expect(page.all('li')[12]).to have_content(@book_1.year)
       expect(page).to have_xpath('//img[@src="https://iguhb7lay20b9vtl-zippykid.netdna-ssl.com/wp-content/uploads/2018/04/1_wswf9QNmKrwTB883hHb4BQ.png"]')
-      expect(page).to have_content(@author_1.name)
-      expect(page).to have_content(@author_2.name)
+      expect(page).to have_link(@author_1.name)
+      expect(page).to have_link(@author_2.name)
       expect(page.all('li')[13]).to have_content("Average Rating: 2")
       expect(page.all('li')[14]).to have_content("Total Reviews: 6")
 
@@ -286,7 +286,7 @@ RSpec.describe "Book index page" do
       expect(page.all('li')[16]).to have_content(@book_4.pages)
       expect(page.all('li')[17]).to have_content(@book_4.year)
       expect(page).to have_xpath('//img[@src="https://iguhb7lay20b9vtl-zippykid.netdna-ssl.com/wp-content/uploads/2018/04/1_wswf9QNmKrwTB883hHb4BQ.png"]')
-      expect(page).to have_content(@author_5.name)
+      expect(page).to have_link(@author_5.name)
       expect(page.all('li')[18]).to have_content("Average Rating: 5.0")
       expect(page.all('li')[19]).to have_content("Total Reviews: 1")
 
@@ -294,7 +294,7 @@ RSpec.describe "Book index page" do
       expect(page.all('li')[21]).to have_content(@book_5.pages)
       expect(page.all('li')[22]).to have_content(@book_5.year)
       expect(page).to have_xpath('//img[@src="https://iguhb7lay20b9vtl-zippykid.netdna-ssl.com/wp-content/uploads/2018/04/1_wswf9QNmKrwTB883hHb4BQ.png"]')
-      expect(page).to have_content(@author_6.name)
+      expect(page).to have_link(@author_6.name)
       expect(page.all('li')[23]).to have_content("Average Rating: 3.8")
       expect(page.all('li')[24]).to have_content("Total Reviews: 4")
 
@@ -302,7 +302,7 @@ RSpec.describe "Book index page" do
       expect(page.all('li')[26]).to have_content(@book_3.pages)
       expect(page.all('li')[27]).to have_content(@book_3.year)
       expect(page).to have_xpath('//img[@src="https://s26162.pcdn.co/wp-content/uploads/2018/08/81Ya99Bc-jL.jpg"]')
-      expect(page).to have_content(@author_4.name)
+      expect(page).to have_link(@author_4.name)
       expect(page.all('li')[28]).to have_content("Average Rating: 3.0")
       expect(page.all('li')[29]).to have_content("Total Reviews: 3")
     end
@@ -321,7 +321,7 @@ RSpec.describe "Book index page" do
         expect(page.all('li')[1]).to have_content(@book_3.pages)
         expect(page.all('li')[2]).to have_content(@book_3.year)
         expect(page).to have_xpath('//img[@src="https://s26162.pcdn.co/wp-content/uploads/2018/08/81Ya99Bc-jL.jpg"]')
-        expect(page).to have_content(@author_4.name)
+        expect(page).to have_link(@author_4.name)
         expect(page.all('li')[3]).to have_content("Average Rating: 3.0")
         expect(page.all('li')[4]).to have_content("Total Reviews: 3")
 
@@ -329,7 +329,7 @@ RSpec.describe "Book index page" do
         expect(page.all('li')[6]).to have_content(@book_5.pages)
         expect(page.all('li')[7]).to have_content(@book_5.year)
         expect(page).to have_xpath('//img[@src="https://s26162.pcdn.co/wp-content/uploads/2018/08/81Ya99Bc-jL.jpg"]')
-        expect(page).to have_content(@author_6.name)
+        expect(page).to have_link(@author_6.name)
         expect(page.all('li')[8]).to have_content("Average Rating: 3.8")
         expect(page.all('li')[9]).to have_content("Total Reviews: 4")
 
@@ -337,7 +337,7 @@ RSpec.describe "Book index page" do
         expect(page.all('li')[11]).to have_content(@book_4.pages)
         expect(page.all('li')[12]).to have_content(@book_4.year)
         expect(page).to have_xpath('//img[@src="https://s26162.pcdn.co/wp-content/uploads/2018/08/81Ya99Bc-jL.jpg"]')
-        expect(page).to have_content(@author_5.name)
+        expect(page).to have_link(@author_5.name)
         expect(page.all('li')[13]).to have_content("Average Rating: 5.0")
         expect(page.all('li')[14]).to have_content("Total Reviews: 1")
 
@@ -345,8 +345,8 @@ RSpec.describe "Book index page" do
         expect(page.all('li')[16]).to have_content(@book_1.pages)
         expect(page.all('li')[17]).to have_content(@book_1.year)
         expect(page).to have_xpath('//img[@src="https://iguhb7lay20b9vtl-zippykid.netdna-ssl.com/wp-content/uploads/2018/04/1_wswf9QNmKrwTB883hHb4BQ.png"]')
-        expect(page).to have_content(@author_1.name)
-        expect(page).to have_content(@author_2.name)
+        expect(page).to have_link(@author_1.name)
+        expect(page).to have_link(@author_2.name)
         expect(page.all('li')[18]).to have_content("Average Rating: 2.0")
         expect(page.all('li')[19]).to have_content("Total Reviews: 6")
 
@@ -354,7 +354,7 @@ RSpec.describe "Book index page" do
         expect(page.all('li')[21]).to have_content(@book_2.pages)
         expect(page.all('li')[22]).to have_content(@book_2.year)
         expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
-        expect(page).to have_content(@author_3.name)
+        expect(page).to have_link(@author_3.name)
         expect(page.all('li')[23]).to have_content("Average Rating: 4.5")
         expect(page.all('li')[24]).to have_content("Total Reviews: 2")
 
@@ -362,7 +362,7 @@ RSpec.describe "Book index page" do
         expect(page.all('li')[26]).to have_content(@book_6.pages)
         expect(page.all('li')[27]).to have_content(@book_6.year)
         expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
-        expect(page).to have_content(@author_7.name)
+        expect(page).to have_link(@author_7.name)
         expect(page.all('li')[28]).to have_content("Average Rating: 4.6")
         expect(page.all('li')[29]).to have_content("Total Reviews: 5")
     end
@@ -381,8 +381,8 @@ RSpec.describe "Book index page" do
           expect(page.all('li')[1]).to have_content(@book_1.pages)
           expect(page.all('li')[2]).to have_content(@book_1.year)
           expect(page).to have_xpath('//img[@src="https://iguhb7lay20b9vtl-zippykid.netdna-ssl.com/wp-content/uploads/2018/04/1_wswf9QNmKrwTB883hHb4BQ.png"]')
-          expect(page).to have_content(@author_1.name)
-          expect(page).to have_content(@author_2.name)
+          expect(page).to have_link(@author_1.name)
+          expect(page).to have_link(@author_2.name)
           expect(page.all('li')[3]).to have_content("Average Rating: 2.0")
           expect(page.all('li')[4]).to have_content("Total Reviews: 6")
 
@@ -390,7 +390,7 @@ RSpec.describe "Book index page" do
           expect(page.all('li')[6]).to have_content(@book_6.pages)
           expect(page.all('li')[7]).to have_content(@book_6.year)
           expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
-          expect(page).to have_content(@author_7.name)
+          expect(page).to have_link(@author_7.name)
           expect(page.all('li')[8]).to have_content("Average Rating: 4.6")
           expect(page.all('li')[9]).to have_content("Total Reviews: 5")
 
@@ -398,7 +398,7 @@ RSpec.describe "Book index page" do
           expect(page.all('li')[11]).to have_content(@book_5.pages)
           expect(page.all('li')[12]).to have_content(@book_5.year)
           expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
-          expect(page).to have_content(@author_6.name)
+          expect(page).to have_link(@author_6.name)
           expect(page.all('li')[13]).to have_content("Average Rating: 3.8")
           expect(page.all('li')[14]).to have_content("Total Reviews: 4")
 
@@ -406,7 +406,7 @@ RSpec.describe "Book index page" do
           expect(page.all('li')[16]).to have_content(@book_3.pages)
           expect(page.all('li')[17]).to have_content(@book_3.year)
           expect(page).to have_xpath('//img[@src="https://s26162.pcdn.co/wp-content/uploads/2018/08/81Ya99Bc-jL.jpg"]')
-          expect(page).to have_content(@author_4.name)
+          expect(page).to have_link(@author_4.name)
           expect(page.all('li')[18]).to have_content("Average Rating: 3.0")
           expect(page.all('li')[19]).to have_content("Total Reviews: 3")
 
@@ -415,7 +415,7 @@ RSpec.describe "Book index page" do
           expect(page.all('li')[21]).to have_content(@book_2.pages)
           expect(page.all('li')[22]).to have_content(@book_2.year)
           expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
-          expect(page).to have_content(@author_3.name)
+          expect(page).to have_link(@author_3.name)
           expect(page.all('li')[23]).to have_content("Average Rating: 4.5")
           expect(page.all('li')[24]).to have_content("Total Reviews: 2")
 
@@ -424,7 +424,7 @@ RSpec.describe "Book index page" do
           expect(page.all('li')[26]).to have_content(@book_4.pages)
           expect(page.all('li')[27]).to have_content(@book_4.year)
           expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
-          expect(page).to have_content(@author_5.name)
+          expect(page).to have_link(@author_5.name)
           expect(page.all('li')[28]).to have_content("Average Rating: 5")
           expect(page.all('li')[29]).to have_content("Total Reviews: 1")
         end
@@ -443,7 +443,7 @@ RSpec.describe "Book index page" do
         expect(page.all('li')[1]).to have_content(@book_4.pages)
         expect(page.all('li')[2]).to have_content(@book_4.year)
         expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
-        expect(page).to have_content(@author_5.name)
+        expect(page).to have_link(@author_5.name)
         expect(page.all('li')[3]).to have_content("Average Rating: 5")
         expect(page.all('li')[4]).to have_content("Total Reviews: 1")
 
@@ -451,7 +451,7 @@ RSpec.describe "Book index page" do
         expect(page.all('li')[6]).to have_content(@book_2.pages)
         expect(page.all('li')[7]).to have_content(@book_2.year)
         expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
-        expect(page).to have_content(@author_3.name)
+        expect(page).to have_link(@author_3.name)
         expect(page.all('li')[8]).to have_content("Average Rating: 4.5")
         expect(page.all('li')[9]).to have_content("Total Reviews: 2")
 
@@ -459,7 +459,7 @@ RSpec.describe "Book index page" do
         expect(page.all('li')[11]).to have_content(@book_3.pages)
         expect(page.all('li')[12]).to have_content(@book_3.year)
         expect(page).to have_xpath('//img[@src="https://s26162.pcdn.co/wp-content/uploads/2018/08/81Ya99Bc-jL.jpg"]')
-        expect(page).to have_content(@author_4.name)
+        expect(page).to have_link(@author_4.name)
         expect(page.all('li')[13]).to have_content("Average Rating: 3.0")
         expect(page.all('li')[14]).to have_content("Total Reviews: 3")
 
@@ -467,7 +467,7 @@ RSpec.describe "Book index page" do
         expect(page.all('li')[16]).to have_content(@book_5.pages)
         expect(page.all('li')[17]).to have_content(@book_5.year)
         expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
-        expect(page).to have_content(@author_6.name)
+        expect(page).to have_link(@author_6.name)
         expect(page.all('li')[18]).to have_content("Average Rating: 3.8")
         expect(page.all('li')[19]).to have_content("Total Reviews: 4")
 
@@ -475,7 +475,7 @@ RSpec.describe "Book index page" do
         expect(page.all('li')[21]).to have_content(@book_6.pages)
         expect(page.all('li')[22]).to have_content(@book_6.year)
         expect(page).to have_xpath('//img[@src="https://images.penguinrandomhouse.com/cover/9781101931288"]')
-        expect(page).to have_content(@author_7.name)
+        expect(page).to have_link(@author_7.name)
         expect(page.all('li')[23]).to have_content("Average Rating: 4.6")
         expect(page.all('li')[24]).to have_content("Total Reviews: 5")
 
@@ -483,8 +483,8 @@ RSpec.describe "Book index page" do
         expect(page.all('li')[26]).to have_content(@book_1.pages)
         expect(page.all('li')[27]).to have_content(@book_1.year)
         expect(page).to have_xpath('//img[@src="https://iguhb7lay20b9vtl-zippykid.netdna-ssl.com/wp-content/uploads/2018/04/1_wswf9QNmKrwTB883hHb4BQ.png"]')
-        expect(page).to have_content(@author_1.name)
-        expect(page).to have_content(@author_2.name)
+        expect(page).to have_link(@author_1.name)
+        expect(page).to have_link(@author_2.name)
         expect(page.all('li')[28]).to have_content("Average Rating: 2.0")
         expect(page.all('li')[29]).to have_content("Total Reviews: 6")
     end
