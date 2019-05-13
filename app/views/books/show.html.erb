@@ -1,4 +1,4 @@
-<h1><%= @book.title %> Show Page</h1>
+<h1><%= link_to @book.title, book_path(@book) %> Show Page</h1>
 <section id="review-link">
   <%= link_to "Add a Review", new_book_review_path(@book) %>
 

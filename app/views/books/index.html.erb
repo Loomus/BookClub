@@ -14,7 +14,7 @@
     <ul id="highest-rated">
     <% @highest_rated.each do |book| %>
     <li>
-      <%= book.title %>
+      <%= link_to book.title, book_path(book) %>
     </li>
     <li>
       Average Rating: <%= book.avg_rating %>
@@ -24,7 +24,7 @@
   <ul id="worst-rated">
     <% @lowest_rated.each do |book| %>
     <li>
-      <%= book.title %>
+      <%= link_to book.title, book_path(book) %>
     </li>
     <li>
       Average Rating: <%= book.avg_rating %>

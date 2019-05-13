@@ -32,6 +32,7 @@ describe "Books Show page" do
       visit book_path(@book_1)
 
       expect(page).to have_content("#{@book_1.title} Show Page")
+      expect(page).to have_link(@book_1.title)
       expect(page).to have_content(@author_1.name)
       expect(page).to have_content(@author_2.name)
       expect(page).to have_content("Page Number: #{@book_1.pages}")

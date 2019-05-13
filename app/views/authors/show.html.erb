@@ -4,7 +4,7 @@
   <% @author.books.each do |book| %>
   <ul id="book-<%= book.id %>">
     <li>
-    <%= book.title %>
+    <%= link_to book.title, book_path(book) %>
     </li>
       <%= book.top_review.first.title %>
       <p><%= book.top_review.first.rating %></p>

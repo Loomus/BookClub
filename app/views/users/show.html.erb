@@ -8,7 +8,7 @@
     <% if @sort_reviews == nil %>
     <% @user.reviews.each do |review| %>
     <ul id="review-<%= review.id %>">
-      <li><%= review.book.title %></li>
+      <li><%= link_to review.book.title, book_path(review.book) %></li>
       <li><img class="review_img" src="<%= review.book.cover_image %>"></li>
       <p><%= review.title %></p>
       <li><%= review.rating %></li>
@@ -20,7 +20,7 @@
     <% else %>
     <% @sort_reviews.each do |review| %>
     <ul id="review-<%= review.id %>">
-      <li><%= review.book.title %></li>
+      <li><%= link_to review.book.title, book_path(review.book) %></li>
       <li><img class="review_img" src="<%= review.book.cover_image %>"></li>
       <p><%= review.title %></p>
       <li><%= review.rating %></li>
