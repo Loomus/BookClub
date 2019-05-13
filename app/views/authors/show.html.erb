@@ -21,7 +21,7 @@
     <% book.authors.each do |author| %>
     <% if author.name != @author.name %>
     <li>
-    Co Authored by: <%= author.name %>
+    Co Authored by: <%= link_to author.name, author_path(author)%>
     </li>
     <% end %>
     <% end %>
