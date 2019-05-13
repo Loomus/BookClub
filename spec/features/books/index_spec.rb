@@ -523,11 +523,11 @@ RSpec.describe "Book index page" do
         end
         it "Shows a link to create a new book, I am redirected to a form" do
 
-          visit books_path
+        visit books_path
 
-          click_link "Add a Book"
+        click_link "Add a Book"
 
-          expect(current_path).to eq(new_book_path)
+        expect(current_path).to eq(new_book_path)
       end
     end
   end
