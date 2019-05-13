@@ -108,6 +108,28 @@ describe "Books Show page" do
 
       expect(current_path).to eq(new_book_review_path(@book_1))
     end
+    it "On a book show page, there is a link to delete book, when clicked I return to index and book is gone" do
+      book = Book.create!(title: "Delete Me", pages: 332, year: 1994, cover_image: "https://images-na.ssl-images-amazon.com/images/I/8167H8DUjnL.jpg")
+      book.authors.create(name: "John")
+      book.authors.create(name: "Jenna")
+
+      user_1 = User.create!(name: "Jim")
+      user_2 = User.create!(name: "Larry")
+
+      review_1 = Review.create!(title: "Review 1 on book", rating: 4, description: "Book was bad", user: user_2, book: book)
+      review_2 = Review.create!(title: "Review 1 on book", rating: 4, description: "Book was good", user: user_1, book: book)
+
+      visit book_path(book)
+
+      within("#review-link") do
+        click_link "Delete Book"
+      end
+      expect(current_path).to eq(books_path)
+      expect(page).to_not have_content(book.title)
+      expect(page).to_not have_content(book.pages)
+      expect(page).to_not have_content(book.year)
+      expect(page).to_not have_xpath('//img[@src="https://images-na.ssl-images-amazon.com/images/I/8167H8DUjnL.jpg"]')
+    end
   end
 end
 
