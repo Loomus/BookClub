@@ -86,5 +86,5 @@ review_7 = Review.create!(title: "Mockingbird review 1" ,rating: 3 ,description:
 
 review_8 = Review.create!(title: "Jurassic review 1" ,rating: 2 ,description: "I didn't like it, i'm afraid of dinosaurs" ,book: jurassic ,user: user_1)
 
-review_9 = Review.create!(title: "moby dick review 1" ,rating: 1 ,description: "I didn't like it, i'm afraid of dinosaurs" ,book: moby_dick ,user: user_1)
+review_9 = Review.create!(title: "moby dick review 1" ,rating: 1 ,description: "This book was a book" ,book: moby_dick ,user: user_1)
 review_10 = Review.create!(title: "moby dick review 2" ,rating: 2 ,description: "Not good, I hate the ocean and whales" ,book: moby_dick ,user: user_2)
