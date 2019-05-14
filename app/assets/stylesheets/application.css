@@ -13,3 +13,21 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  background-color: grey;
+}
+
+img {
+  height: 400px;
+}
+
+.card {
+  margin: 20px;
+  width: 100%;
+  background-color: lightgrey;
+}
+
+.container {
+    max-width: 1200px;
+}

@@ -1,94 +1,106 @@
-<h1>Books Index</h1>
-
-<nav id="sorting">
-  <%= link_to "Highest Rated", books_path(sort: :rating, order: :desc) %>
-  <%= link_to "Lowest Rated", books_path(sort: :rating, order: :asc) %>
-  <%= link_to "Highest Page Count", books_path(sort: :pages, order: :desc) %>
-  <%= link_to "Lowest Page Count", books_path(sort: :pages, order: :asc) %>
-  <%= link_to "Most Reviewed", books_path(sort: :reviews, order: :desc) %>
-  <%= link_to "Least Reviewed", books_path(sort: :reviews, order: :asc) %>
-  <%= link_to "Add a Book", new_book_path %>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <h1 class="navbar-brand">Books Index</h1>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <%= link_to "Add a Book", new_book_path, {class: "nav-link"} %>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Sorting
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="sorting">
+          <%= link_to "Highest Rated", books_path(sort: :rating, order: :desc), {class: "dropdown-item"} %>
+          <%= link_to "Lowest Rated", books_path(sort: :rating, order: :asc), {class: "dropdown-item"} %>
+          <%= link_to "Highest Page Count", books_path(sort: :pages, order: :desc), {class: "dropdown-item"} %>
+          <%= link_to "Lowest Page Count", books_path(sort: :pages, order: :asc), {class: "dropdown-item"} %>
+          <%= link_to "Most Reviewed", books_path(sort: :reviews, order: :desc), {class: "dropdown-item"} %>
+          <%= link_to "Least Reviewed", books_path(sort: :reviews, order: :asc), {class: "dropdown-item"} %>
+        </div>
+      </li>
+      <li class="nav-item dropdown" id="book-statistics">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Highest Rated
+        </a>
+        <div class="dropdown-menu" id="highest-rated" aria-labelledby="navbarDropdown">
+          <% @highest_rated.each do |book| %>
+          <%= link_to book.title, book_path(book), { class: "dropdown-item" } %>
+          <p class="dropdown-item">Average Rating: <%= book.avg_rating %></p>
+          <% end %>
+        </div>
+      </li>
+      <li class="nav-item dropdown" id="book-statistics">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Lowest Rated
+        </a>
+        <div class="dropdown-menu" id="worst-rated" aria-labelledby="navbarDropdown">
+          <% @lowest_rated.each do |book| %>
+          <%= link_to book.title, book_path(book), { class: "dropdown-item" } %>
+          <p class="dropdown-item">Average Rating: <%= book.avg_rating %></p>
+          <% end %>
+        </div>
+      </li>
+      <li class="nav-item dropdown" id="book-statistics">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Most Reviews
+        </a>
+        <div class="dropdown-menu" id="most-reviews" aria-labelledby="navbarDropdown">
+          <% @top_users.each do |user| %>
+          <%= link_to user.name, user_path(user), { class: "dropdown-item" } %>
+          <p class="dropdown-item">Total Reviews: <%= user.reviews.count %></p>
+          <% end %>
+        </div>
+      </li>
+    </ul>
+  </div>
 </nav>
 
-  <section id="book-statistics">
-    <ul id="highest-rated">
-    <% @highest_rated.each do |book| %>
-    <li>
-      <%= link_to book.title, book_path(book) %>
-    </li>
-    <li>
-      Average Rating: <%= book.avg_rating %>
-    </li>
+<div class="container" id="books">
+  <div class="row">
+    <% @books.each do |book| %>
+    <div class="col-sm-3" >
+      <div class="card">
+        <img class="card-img-top" src="<%= book.cover_image %>">
+          <div class="card-block" id="book-info-<%= book.id %>">
+            <h5 class="card-title"><%= link_to book.title, book_path(book) %></h5>
+            <p class="card-text"><%= book.pages %></p>
+            <p class="card-text"><%= book.year %></p>
+            <% book.authors.each do |author| %>
+              <p class="card-text">Authored By: <%= link_to author.name, author_path(author) %></p>
+              <% end %>
+              <p class="card-text">Average Rating: <%= book.avg_rating %></p>
+              <p class="card-text">Total Reviews: <%= book.review_count.to_i %></p>
+          </div>
+      </div>
+    </div>
     <% end %>
-  </ul>
-  <ul id="worst-rated">
-    <% @lowest_rated.each do |book| %>
-    <li>
-      <%= link_to book.title, book_path(book) %>
-    </li>
-    <li>
-      Average Rating: <%= book.avg_rating %>
-    </li>
-    <% end %>
-    </ul>
-  <ul id="most-reviews">
-    <% @top_users.each do |user| %>
-    <li>
-      <%= link_to user.name, user_path(user) %>
-    </li>
-    <li>
-      Total Reviews: <%= user.reviews.count %>
-    </li>
-    <% end %>
-    </ul>
-  </section>
-
-<div id="books">
-   <% @books.each do |book| %>
-  <ul id="book-info-<%= book.id %>">
-    <li>
-      <%= link_to book.title, book_path(book) %>
-    </li>
-    <li>
-      <%= book.pages %>
-    </li>
-    <li>
-      <%= book.year %>
-    </li>
-      <img class="img-thumbnail" src="<%= book.cover_image %>">
-    <% book.authors.each do |author| %>
-    <p>
-      Authored By: <%= link_to author.name, author_path(author) %>
-    </p>
-    <% end %>
-    <ul id="book-rev-stat-<%= book.id %>">
-      <li>Average Rating: <%= book.avg_rating %></li>
-      <li>Total Reviews: <%= book.review_count.to_i %></li>
-    </ul>
-<% end %>
+  </div>
 </div>
 
 <% if @no_reviews != nil %>
-<h2>Books Not Reviewed</h2>
-<% @no_reviews.each do |book| %>
 <div>
- <ul id="not-reviewed-<%= book.id %>">
-   <li>
-     <%= link_to book.title, book_path(book) %>
-   </li>
-   <li>
-     <%= book.pages %>
-   </li>
-   <li>
-     <%= book.year %>
-   </li>
-     <img class="img-thumbnail" src="<%= book.cover_image %>">
-   <% book.authors.each do |author| %>
-   <p>
-     Authored By: <%= link_to author.name, author_path(author) %>
-   </p>
-   <% end %>
-  </ul>
+  <h2>Books Not Reviewed</h2>
 </div>
-<% end %>
+
+<div class="container" id="books-not-reviewed">
+  <div class="row" >
+    <% @no_reviews.each do |book| %>
+    <div class="col-sm-3" >
+      <div class="card" id="not-reviewed-<%= book.id %>">
+        <img class="card-img-top" src="<%= book.cover_image %>">
+          <div class="card-block" id="book-info-<%= book.id %>">
+            <h5 class="card-title"><%= link_to book.title, book_path(book) %></h5>
+            <p class="card-text"><%= book.pages %></p>
+            <p class="card-text"><%= book.year %></p>
+            <% book.authors.each do |author| %>
+              <p class="card-text">Authored By: <%= link_to author.name, author_path(author) %></p>
+              <% end %>
+              <p class="card-text">Average Rating: <%= book.avg_rating %></p>
+              <p class="card-text">Total Reviews: <%= book.review_count.to_i %></p>
+          </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
 <% end %>

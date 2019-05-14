@@ -1,34 +1,32 @@
 <h1><%= @author.name %> Show Page</h1>
+
 <h2 id="delete"><%= link_to "Delete Author", author_path(@author), method: :delete %></h2>
+
 <div id="author-book-info">
+
   <% @author.books.each do |book| %>
+
   <ul id="book-<%= book.id %>">
-    <li>
-    <%= link_to book.title, book_path(book) %>
-    </li>
+    <li><%= link_to book.title, book_path(book) %></li>
       <% if book.reviews.count == 0 %>
-      <li>No reviews found</li>
+        <li>No reviews found</li>
       <% else %>
-      <%= book.top_review.first.title %>
-      <p><%= book.top_review.first.rating %></p>
-      <p><%= link_to book.top_review.first.user.name, user_path(book.top_review.first.user) %></p>
+        <p><%= book.top_review.first.title %></p>
+        <p><%= book.top_review.first.rating %></p>
+        <p><%= link_to book.top_review.first.user.name, user_path(book.top_review.first.user) %></p>
       <% end %>
-    <li>
-    </li>
-      <img class="img-thumbnail" src="<%= book.cover_image %>">
-    <li>
-    <%= book.year %>
-    </li>
-    <li>
-    <%= book.pages %>
-    </li>
-    <% book.authors.each do |author| %>
-    <% if author.name != @author.name %>
-    <li>
-    Co Authored by: <%= link_to author.name, author_path(author)%>
-    </li>
-    <% end %>
-    <% end %>
+
+
+    <li><img class="img-thumbnail" src="<%= book.cover_image %>"></li>
+    <li><%= book.year %></li>
+    <li><%= book.pages %></li>
+      <% book.authors.each do |author| %>
+      <% if author.name != @author.name %>
+        <li>Co Authored by: <%= link_to author.name, author_path(author)%></li>
+      <% end %>
+      <% end %>
   </ul>
+
   <% end %>
+
 </div>
