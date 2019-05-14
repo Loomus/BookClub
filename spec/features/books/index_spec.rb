@@ -52,6 +52,7 @@ RSpec.describe "Book index page" do
     @review_21 = Review.create!(title: "review 12", rating: 1, description: "Book 1 review", user: @user_6, book: @book_1)
   end
 
+
   describe "As a visitor I see a navigation bar" do
     it "It includes a links to the home page and a link to browse all books" do
 
@@ -529,6 +530,49 @@ RSpec.describe "Book index page" do
 
         expect(current_path).to eq(new_book_path)
       end
+      it "books that are not reviewed are displayed at the bottom of the page" do
+        book_7 = Book.create!(title: "Book 7 no review", pages: 223, year: 1987, cover_image: "www.google.com")
+          author_1 = book_7.authors.create!(name: "Shrek")
+        book_8 = Book.create!(title: "Book 8 no review", pages: 435, year: 1996, cover_image: "www.yahoo.com")
+          author_2 = book_8.authors.create!(name: "Donkey")
+        book_9 = Book.create!(title: "Book 9 no review", pages: 565, year: 1988, cover_image: "www.askjeeves.com")
+          author_3 = book_9.authors.create!(name: "Fiona")
+
+        visit books_path
+
+        within("#sorting") do
+          click_link "Highest Rated"
+        end
+
+        within("#not-reviewed-#{book_7.id}") do
+          expect(page).to have_link(book_7.title)
+          expect(page).to have_content(book_7.pages)
+          expect(page).to have_content(book_7.year)
+          expect(page).to have_xpath('//img[@src="www.google.com"]')
+        end
+        within("#not-reviewed-#{book_8.id}") do
+          expect(page).to have_link(book_8.title)
+          expect(page).to have_content(book_8.pages)
+          expect(page).to have_content(book_8.year)
+          expect(page).to have_xpath('//img[@src="www.yahoo.com"]')
+        end
+        within("#not-reviewed-#{book_9.id}") do
+          expect(page).to have_link(book_9.title)
+          expect(page).to have_content(book_9.pages)
+          expect(page).to have_content(book_9.year)
+          expect(page).to have_xpath('//img[@src="www.askjeeves.com"]')
+          end
+        end
+      end
     end
   end
-end
+
+# within("#sorting") do
+#     click_link "Lowest Rated"
+#   end
+# within("#sorting") do
+#       click_link "Most Reviewed"
+#     end
+# within("#sorting") do
+#       click_link "Least Reviewed"
+#     end

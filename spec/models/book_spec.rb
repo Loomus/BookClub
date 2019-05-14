@@ -41,7 +41,7 @@ describe Book do
     it { should have_many(:users).through(:reviews)}
   end
   describe "Validations" do
-    it { should validate_presence_of :title }
+    it { should validate_uniqueness_of :title }
     it { should validate_presence_of :pages }
     it { should validate_presence_of :year }
     it { should validate_presence_of :cover_image }
@@ -64,25 +64,25 @@ describe Book do
       expect(@book_1.top_3_reviews).to eq([@review_10,@review_2,@review_11])
     end
     it ".bottom_3_reviews" do
-      user_1 = User.create(name: "Jim")
-      user_2 = User.create(name: "Joe")
-      user_3 = User.create(name: "Jenna")
-      user_4 = User.create(name: "Megan")
-      user_5 = User.create(name: "Brian")
+      user_1 = User.create!(name: "Jim")
+      user_2 = User.create!(name: "Joe")
+      user_3 = User.create!(name: "Jenna")
+      user_4 = User.create!(name: "Megan")
+      user_5 = User.create!(name: "Brian")
 
-      book_1 = Book.create(title: "Book 1 title", pages: 300, year: 1992, cover_image: "https://iguhb7lay20b9vtl-zippykid.netdna-ssl.com/wp-content/uploads/2018/04/1_wswf9QNmKrwTB883hHb4BQ.png")
-      book_2 = Book.create(title: "Book 2 title", pages: 350, year: 1986, cover_image: "https://images.penguinrandomhouse.com/cover/9781101931288")
-      book_3 = Book.create(title: "Book 3 title", pages: 125, year: 1942, cover_image: "https://s26162.pcdn.co/wp-content/uploads/2018/08/81Ya99Bc-jL.jpg")
-
-
-      review_1 = Review.create!(title: "new review 1" ,rating: 4 ,description: "blahhhhahha" ,user: user_1, book: book_1 )
-      review_2 = Review.create!(title: "new review 1" ,rating: 2 ,description: "blahhhhahha" ,user: user_2, book: book_1 )
-      review_3 = Review.create!(title: "new review 1" ,rating: 5 ,description: "blahhhhahha" ,user: user_3, book: book_1 )
-      review_4 = Review.create!(title: "new review 1" ,rating: 1 ,description: "blahhhhahha" ,user: user_4, book: book_1 )
-      review_5 = Review.create!(title: "new review 1" ,rating: 3 ,description: "blahhhhahha" ,user: user_5, book: book_1 )
+      book_1 = Book.create!(title: "Book title 1", pages: 300, year: 1992, cover_image: "https://iguhb7lay20b9vtl-zippykid.netdna-ssl.com/wp-content/uploads/2018/04/1_wswf9QNmKrwTB883hHb4BQ.png")
+      book_2 = Book.create!(title: "Book title 2", pages: 350, year: 1986, cover_image: "https://images.penguinrandomhouse.com/cover/9781101931288")
+      book_3 = Book.create!(title: "Book title 3", pages: 125, year: 1942, cover_image: "https://s26162.pcdn.co/wp-content/uploads/2018/08/81Ya99Bc-jL.jpg")
 
 
-      expect(book_1.bottom_3_reviews).to eq([review_4, review_2, review_5])
+      review_1 = Review.create!(title: "new review 1" ,rating: 4 ,description: "blhahha" ,user: user_1, book: book_1 )
+      review_2 = Review.create!(title: "new review 2" ,rating: 2 ,description: "blahhhhha" ,user: user_2, book: book_1 )
+      review_3 = Review.create!(title: "new review 3" ,rating: 5 ,description: "ahhhhahha" ,user: user_3, book: book_1 )
+      review_4 = Review.create!(title: "new review 4" ,rating: 1 ,description: "blahahha" ,user: user_4, book: book_1 )
+      review_5 = Review.create!(title: "new review 5" ,rating: 3 ,description: "blahhhhha" ,user: user_5, book: book_1 )
+
+
+      expect(book_1.bottom_3_reviews.to_a).to eq([review_4, review_2, review_5])
     end
     it ".top_review" do
 
@@ -126,14 +126,25 @@ describe Book do
         @books = Book.all
 
         book = Book.create!(title: "whatever", pages: 200, year: 1990, cover_image: "www.google.com")
-        book_2 = Book.create!(title: "whatever", pages: 200, year: 1990, cover_image: "www.google.com")
-        book_3 = Book.create!(title: "whatever", pages: 200, year: 1990, cover_image: "www.google.com")
+        book_2 = Book.create!(title: "whatevs", pages: 200, year: 1990, cover_image: "www.google.com")
+        book_3 = Book.create!(title: "whateveroni", pages: 200, year: 1990, cover_image: "www.google.com")
 
         review = Review.create!(title: "new rev 1", rating: 3, description: "adkjsfalkjsdf", user: @user_3, book: book )
         review_2 = Review.create!(title: "new rev 2", rating: 3, description: "adkjsfalkjsdf", user: @user_3, book: book_2)
         review_3 = Review.create!(title: "new rev 2", rating: 3, description: "adkjsfalkjsdf", user: @user_1, book: book)
 
         expect(@books.most_reviews).to eq([@user_3, @user_1, @user_2])
+      end
+      it ".no_reviews" do
+        book_7 = Book.create!(title: "Book 7 no review", pages: 223, year: 1987, cover_image: "www.google.com")
+          author_1 = book_7.authors.create!(name: "Shrek")
+        book_8 = Book.create!(title: "Book 8 no review", pages: 435, year: 1996, cover_image: "www.yahoo.com")
+          author_2 = book_8.authors.create!(name: "Donkey")
+        book_9 = Book.create!(title: "Book 9 no review", pages: 565, year: 1988, cover_image: "www.askjeeves.com")
+          author_3 = book_9.authors.create!(name: "Fiona")
+          @books = Book.all
+
+          expect(@books.no_reviews).to eq([book_7, book_8, book_9])
       end
     end
   end

@@ -22,9 +22,9 @@ describe "New review form" do
       expect(page).to have_content(4)
       expect(page).to have_content("This book is dank.")
     end
-    it "Sad Path, if user already exists but has not reviewed a book, they are redirected to book show page and the review is displayed" do
+    it "Sad Path, if user already exists but has not reviewed a book, the review is created and user is redirected to book show page and the review is displayed" do
 
-      @user =  User.create(name: "John")
+      user =  User.create(name: "John")
 
       visit  new_book_review_path(@book_1)
 
@@ -42,9 +42,10 @@ describe "New review form" do
     end
     it "Sad Path, if user has already reviewed a book, they are redirected to form" do
 
-      user =  User.create(name: "John")
-      @review = Review.create!(title: "The Fall of Gondolin", rating: 4, description: "This book is dank.", book: @book_1, user: user)
-
+      user = User.create(name: "John")
+      review = @book_1.reviews.new(title: "The Fall of Gondolin", rating: 4, description: "This book is dank.")
+      user.reviews << review
+      review.save
 
       visit  new_book_review_path(@book_1)
 
@@ -52,6 +53,30 @@ describe "New review form" do
       fill_in "review[user]", with: "John"
       fill_in "review[rating]", with: 4
       fill_in "review[description]", with: "This book is dank."
+      click_button "Create Review"
+
+      expect(current_path).to eq(new_book_review_path(@book_1))
+    end
+    it "Sad Path, if a form is incomplete, they are redirected back to form" do
+
+      visit  new_book_review_path(@book_1)
+
+      fill_in "review[title]", with: "The Rise of Gondolin"
+      fill_in "review[user]", with: "Toby"
+      fill_in "review[rating]", with: 4
+      # no description filled in
+      click_button "Create Review"
+
+      expect(current_path).to eq(new_book_review_path(@book_1))
+    end
+    it "Sad Path, if a form is without a user, they are redirected back to form" do
+
+      visit  new_book_review_path(@book_1)
+
+      fill_in "review[title]", with: "The Rise of Gondolin"
+      # no user filled in
+      fill_in "review[rating]", with: 4
+      fill_in "review[description]", with: "This book was terrible, but I would read it again."
       click_button "Create Review"
 
       expect(current_path).to eq(new_book_review_path(@book_1))

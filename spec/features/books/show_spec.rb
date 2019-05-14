@@ -32,22 +32,25 @@ describe "Books Show page" do
       visit book_path(@book_1)
 
       expect(page).to have_content("#{@book_1.title} Show Page")
-      expect(page).to have_content(@book_1.title)
+      expect(page).to have_content("Page Number: #{@book_1.pages}")
+      expect(page).to have_content("Published In: #{@book_1.year}")
+      expect(page).to have_xpath('//img[@src="https://iguhb7lay20b9vtl-zippykid.netdna-ssl.com/wp-content/uploads/2018/04/1_wswf9QNmKrwTB883hHb4BQ.png"]')
       expect(page).to have_link(@author_1.name)
       expect(page).to have_link(@author_2.name)
-      expect(page).to have_content("Page Number: #{@book_1.pages}")
-      expect(page).to have_xpath('//img[@src="https://iguhb7lay20b9vtl-zippykid.netdna-ssl.com/wp-content/uploads/2018/04/1_wswf9QNmKrwTB883hHb4BQ.png"]')
     end
-
+    # I also see a list of reviews for that book.
+    # Each review will have a title and user, a numeric rating
+    # from 1 to 5, and text for the review itself, and all content
+    # must be present for each review.
     it "Shows all reviews for book, along with review info, title, user, rating(1-5), description" do
 
       visit book_path(@book_1)
 
-      within("#review_info_#{@book_1.id}") do
+      within("#review_info") do
         expect(page).to have_content(@review_1.title)
+        expect(page).to have_link(@user_1.name)
         expect(page).to have_content(@review_1.rating)
         expect(page).to have_content(@review_1.description)
-        expect(page).to have_link(@user_1.name)
       end
     end
     it "I see an area on the page for statistics about reviews:
@@ -55,37 +58,37 @@ describe "Books Show page" do
 
       visit book_path(@book_1)
 
-      within("#top_3_reviews_#{@book_1.id}") do
-        expect(page).to have_content(@review_10.title)
-        expect(page).to have_content(@review_10.rating)
-        expect(page).to have_link(@user_1.name)
+      within("#top_3_reviews") do
+        expect(page.all("li")[0]).to have_content(@review_10.title)
+        expect(page.all("li")[1]).to have_content(@review_10.rating)
+        expect(page.all("li")[2]).to have_link(@user_1.name)
 
-        expect(page).to have_content(@review_2.title)
-        expect(page).to have_content(@review_2.rating)
-        expect(page).to have_link(@user_2.name)
+        expect(page.all("li")[3]).to have_content(@review_2.title)
+        expect(page.all("li")[4]).to have_content(@review_2.rating)
+        expect(page.all("li")[5]).to have_link(@user_2.name)
 
-        expect(page).to have_content(@review_11.title)
-        expect(page).to have_content(@review_11.rating)
-        expect(page).to have_link(@user_3.name)
+        expect(page.all("li")[6]).to have_content(@review_11.title)
+        expect(page.all("li")[7]).to have_content(@review_11.rating)
+        expect(page.all("li")[8]).to have_link(@user_3.name)
       end
     end
     it "show the bottom three reviews for this book (title, rating and user only)" do
 
       visit book_path(@book_1)
 
-      within("#bottom_3_reviews_#{@book_1.id}") do
+      within("#bottom_3_reviews") do
 
-        expect(page).to have_content(@review_3.title)
-        expect(page).to have_content(@review_3.rating)
-        expect(page).to have_link(@user_5.name)
+        expect(page.all("li")[0]).to have_content(@review_12.title)
+        expect(page.all("li")[1]).to have_content(@review_12.rating)
+        expect(page.all("li")[2]).to have_link(@user_6.name)
 
-        expect(page).to have_content(@review_1.title)
-        expect(page).to have_content(@review_1.rating)
-        expect(page).to have_link(@user_4.name)
+        expect(page.all("li")[3]).to have_content(@review_3.title)
+        expect(page.all("li")[4]).to have_content(@review_3.rating)
+        expect(page.all("li")[5]).to have_link(@user_5.name)
 
-        expect(page).to have_content(@review_12.title)
-        expect(page).to have_content(@review_12.rating)
-        expect(page).to have_link(@user_6.name)
+        expect(page.all("li")[6]).to have_content(@review_1.title)
+        expect(page.all("li")[7]).to have_content(@review_1.rating)
+        expect(page.all("li")[8]).to have_link(@user_4.name)
       end
     end
 
@@ -93,8 +96,8 @@ describe "Books Show page" do
 
         visit book_path(@book_1)
 
-        within("#average_rating_#{@book_1.id}") do
-          expect(page).to have_content(@book_1.avg_rating)
+        within("#average_rating") do
+          expect(page).to have_content(2.7)
       end
     end
 

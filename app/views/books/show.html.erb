@@ -8,42 +8,55 @@
     <% @book.authors.each do |author| %>
       <li><%= link_to author.name, author_path(author) %></li>
       <% end %>
+      <li>Published In: <%= @book.year %></li>
       <li>Page Number: <%= @book.pages %></li>
       <li><img class="img-thumbnail" src="<%= @book.cover_image %>"></li>
   </ul>
 </section>
-<section id="review_info_<%=@book.id%>">
+<section id="review_info">
   <ul>
     <% @book.reviews.each do |review| %>
     <li><%= review.title %></li>
+    <% if review.user == nil %>
+    <li>No User</li>
+    <% else %>
+    <li><%= link_to review.user.name, user_path(review.user) %></li>
+    <% end %>
     <li><%= review.rating %></li>
     <li><%= review.description %></li>
-    <li><%= link_to review.user.name, user_path(review.user) %></li>
     <% end %>
   </ul>
 </section>
 <h2>Statistics</h2>
 <h3>Top Ratings</h3>
-<section id="top_3_reviews_<%=@book.id%>">
+<section id="top_3_reviews">
   <ul>
     <% @book.top_3_reviews.each do |review| %>
     <li><%= review.title %></li>
     <li><%= review.rating  %></li>
+    <% if review.user == nil %>
+    <li>No User</li>
+    <% else %>
     <li><%= link_to review.user.name, user_path(review.user) %></li>
+    <% end %>
     <% end %>
   </ul>
 </section>
 <h4>Lowest Ratings</h4>
-<section id="bottom_3_reviews_<%=@book.id%>">
+<section id="bottom_3_reviews">
   <ul>
     <% @book.bottom_3_reviews.each do |review| %>
     <li><%= review.title %></li>
     <li><%= review.rating %></li>
+    <% if review.user == nil %>
+    <li>No User</li>
+      <% else %>
     <li><%= link_to review.user.name, user_path(review.user) %></li>
+    <% end %>
     <% end %>
   </ul>
 </section>
 <h5>Average Rating for this book:</h5>
-<section id="average_rating_<%= @book.id %>">
+<section id="average_rating">
   <p><%= @book.avg_rating %></p>
 </section>
