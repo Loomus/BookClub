@@ -1,41 +1,64 @@
-<h1><%= @user.name %> Show Page</<h1>
-
-  <section id="show-links">
-    <%= link_to "Newest Reviews", user_path(@user, sort: :desc) %>
-    <%= link_to "Oldest Reviews", user_path(@user, sort: :asc) %>
-  </section>
-
-  <section id="review-list">
-    <h2><%= @user.name %>'s Reviews</h2>
-
-    <% if @sort_reviews == nil %>
-    <% @user.reviews.each do |review| %>
-
-    <ul id="review-<%= review.id %>">
-      <li><%= link_to review.book.title, book_path(review.book) %></li>
-      <li><img class="review_img" src="<%= review.book.cover_image %>"></li>
-      <p><%= review.title %></p>
-      <li><%= review.rating %></li>
-      <li><%= review.description %></li>
-      <p>Review created at: <%= review.created_at %></p>
-      <%= link_to "Delete Review", book_review_path(review.id, review.user_id), method: :delete %>
-    </ul>
-
-    <% end %>
-    <% else %>
-
-    <% @sort_reviews.each do |review| %>
-      <ul id="review-<%= review.id %>">
-        <li><%= link_to review.book.title, book_path(review.book) %></li>
-        <li><img class="review_img" src="<%= review.book.cover_image %>"></li>
-        <p><%= review.title %></p>
-        <li><%= review.rating %></li>
-        <li><%= review.description %></li>
-        <p>Review created at: <%= review.created_at %></p>
-        <%= link_to "Delete Review", book_review_path(review.id, review.user_id), method: :delete %>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <h1 class="navbar-brand">Show Page</h1>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto", id="show-links">
+        <li class="nav-item">
+          <%= link_to "Newest Reviews", user_path(@user, sort: :desc), { class: "nav-link"} %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Oldest Reviews", user_path(@user, sort: :asc), { class: "nav-link"} %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Sort Reset", user_path(@user), { class: "nav-link"} %>
+        </li>
       </ul>
+    </div>
+  </nav>
 
-    <% end %>
-    <% end %>
+  <div id="user-divider">
+    <h2><%= @user.name %>'s Reviews</h2>
+  </div>
 
-  </section>
+  <div class="container" id="review-list">
+    <div class="row">
+      <% if @sort_reviews == nil %>
+      <% @user.reviews.each do |review| %>
+      <div class="col-sm-3" >
+        <div class="card">
+          <img class="card-img-top" src="<%= review.book.cover_image %>">
+            <div class="card-block" id="review-<%= review.id %>">
+              <h5 class="card-title"><%= review.title %></h5>
+              <p class="card-text"><%= link_to review.book.title, book_path(review.book) %></p>
+              <p class="card-text"><%= review.title %></p>
+              <p class="card-text"><%= review.rating %></p>
+              <p class="card-text"><%= review.description %></p>
+              <p class="card-text">Review created at: <%= review.created_at %></p>
+              <p class="card-text"><%= link_to "Delete Review", book_review_path(review.id, review.user_id), method: :delete %></p>
+            </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <% else %>
+  <div class="container">
+    <div class="row">
+      <% @sort_reviews.each do |review| %>
+      <div class="col-sm-3" >
+        <div class="card">
+          <img class="card-img-top" src="<%= review.book.cover_image %>">
+            <div class="card-block" id="review-<%= review.id %>">
+              <h5 class="card-title"><%= review.title %></h5>
+              <p class="card-text"><%= link_to review.book.title, book_path(review.book) %></p>
+              <p class="card-text"><%= review.title %></p>
+              <p class="card-text"><%= review.rating %></p>
+              <p class="card-text"><%= review.description %></p>
+              <p class="card-text">Review created at: <%= review.created_at %></p>
+              <p class="card-text"><%= link_to "Delete Review", book_review_path(review.id, review.user_id), method: :delete %></p>
+            </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

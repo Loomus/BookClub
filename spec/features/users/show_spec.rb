@@ -86,14 +86,14 @@ describe User do
         end
 
         within("#review-list") do
-          expect(page.all("p")[0]).to have_content(review_2.title)
-          expect(page.all("p")[1]).to have_content("Review created at: #{review_2.created_at}")
+          expect(page.all("h5")[0]).to have_content(review_2.title)
+          expect(page.all("p")[4]).to have_content("Review created at: #{review_2.created_at}")
 
-          expect(page.all("p")[2]).to have_content(review_1.title)
-          expect(page.all("p")[3]).to have_content("Review created at: #{review_1.created_at}")
+          expect(page.all("h5")[1]).to have_content(review_1.title)
+          expect(page.all("p")[10]).to have_content("Review created at: #{review_1.created_at}")
 
-          expect(page.all("p")[4]).to have_content(review_3.title)
-          expect(page.all("p")[5]).to have_content("Review created at: #{review_3.created_at}")
+          expect(page.all("h5")[2]).to have_content(review_3.title)
+          expect(page.all("p")[16]).to have_content("Review created at: #{review_3.created_at}")
         end
 
         within("#show-links") do
@@ -101,14 +101,14 @@ describe User do
         end
 
         within("#review-list") do
-          expect(page.all("p")[0]).to have_content(review_3.title)
-          expect(page.all("p")[1]).to have_content("Review created at: #{review_3.created_at}")
+          expect(page.all("h5")[0]).to have_content(review_3.title)
+          expect(page.all("p")[4]).to have_content("Review created at: #{review_3.created_at}")
 
-          expect(page.all("p")[2]).to have_content(review_1.title)
-          expect(page.all("p")[3]).to have_content("Review created at: #{review_1.created_at}")
+          expect(page.all("h5")[1]).to have_content(review_1.title)
+          expect(page.all("p")[10]).to have_content("Review created at: #{review_1.created_at}")
 
-          expect(page.all("p")[4]).to have_content(review_2.title)
-          expect(page.all("p")[5]).to have_content("Review created at: #{review_2.created_at}")
+          expect(page.all("h5")[2]).to have_content(review_2.title)
+          expect(page.all("p")[16]).to have_content("Review created at: #{review_2.created_at}")
         end
       end
       describe "there is a link next to each review to delete the review" do

@@ -1,18 +1,32 @@
-<%= form_for @book do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-
-  <%= f.label :pages %>
-  <%= f.text_field :pages %>
-
-  <%= f.label :year %>
-  <%= f.number_field :year %>
-
-  <%= f.label :cover_image %>
-  <%= f.text_field :cover_image, value: "https://ibf.org/site_assets/img/placeholder-book-cover-default.png" %>
-
-  <%= f.label :authors %>
-  <%= f.text_field :authors %>
-
-  <%= f.submit %>
-<% end %>
+<div class="container form-input">
+  <h2 id="form-heading">Enter Book Information</h2>
+  <%= form_for @book do |f| %>
+    <div class="row">
+      <ul class="col-sm">
+        <p><%= f.label :title %></p><br/>
+        <p><%= f.text_field :title %></p>
+      </ul>
+      <ul class="col-sm">
+        <p><%= f.label :pages %></p><br/>
+        <p><%= f.number_field :pages %></p>
+      </ul>
+      <ul class="col-sm">
+        <p><%= f.label :year %></p><br/>
+        <p><%= f.number_field :year %></p>
+      </ul>
+      <ul class="col-sm">
+        <p><%= f.label :cover_image %></p><br/>
+        <p><%= f.text_field :cover_image, value: "https://ibf.org/site_assets/img/placeholder-book-cover-default.png" %></p>
+      </ul>
+      <ul class="col-sm">
+        <p><%= f.label :authors %></p><br/>
+        <p><%= f.text_field :authors %></p>
+      </ul>
+    </div>
+    <div class="row">
+      <ul class="col-sm">
+        <p><%= f.submit %></p>
+      </ul>
+    </div>
+  <% end %>
+</div>
