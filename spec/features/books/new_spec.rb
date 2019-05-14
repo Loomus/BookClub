@@ -79,7 +79,7 @@ describe "As a visitor" do
       fill_in "book[title]", with: "Book about books"
       fill_in "book[pages]", with: 123
       fill_in "book[year]", with: 1990
-      # fill_in "book[cover_image]", with: "https://vignette.wikia.nocookie.net/books-turn-to-movies/images/3/3e/Harry-Potter-and-the-Deathly-Hallows-Part-1.jpg/revision/latest?cb=20160321001722"
+
       fill_in "book[authors]", with: "Riceroni"
 
       click_on "Create Book"
@@ -95,7 +95,3 @@ describe "As a visitor" do
     end
   end
 end
-# and each author will be added to the database.
-# Authors added to the database should have their names converted
-# to Title Case.
-# Author Names should be unique within the system.
