@@ -1,62 +1,70 @@
 <h1><%= @book.title %> Show Page</h1>
+
+<section id="average_rating">
+  <h5>Average Rating for this book:</h5>
+    <p><%= @book.avg_rating %></p>
+</section>
+
 <section id="review-link">
   <%= link_to "Add a Review", new_book_review_path(@book) %>
   <%= link_to "Delete Book", book_path(@book), method: :delete %>
 </section>
+
 <section>
   <ul>
     <% @book.authors.each do |author| %>
       <li><%= link_to author.name, author_path(author) %></li>
-      <% end %>
-      <li>Published In: <%= @book.year %></li>
-      <li>Page Number: <%= @book.pages %></li>
-      <li><img class="img-thumbnail" src="<%= @book.cover_image %>"></li>
+    <% end %>
+    <li>Published In: <%= @book.year %></li>
+    <li>Page Number: <%= @book.pages %></li>
+    <li><img class="img-thumbnail" src="<%= @book.cover_image %>"></li>
   </ul>
 </section>
+
 <section id="review_info">
   <ul>
     <% @book.reviews.each do |review| %>
-    <li><%= review.title %></li>
+      <li><%= review.title %></li>
     <% if review.user == nil %>
-    <li>No User</li>
+      <li>No User</li>
     <% else %>
-    <li><%= link_to review.user.name, user_path(review.user) %></li>
+      <li><%= link_to review.user.name, user_path(review.user) %></li>
     <% end %>
-    <li><%= review.rating %></li>
-    <li><%= review.description %></li>
+      <li><%= review.rating %></li>
+      <li><%= review.description %></li>
     <% end %>
   </ul>
 </section>
+
 <h2>Statistics</h2>
-<h3>Top Ratings</h3>
+
 <section id="top_3_reviews">
+  <h3>Top Ratings</h3>
   <ul>
     <% @book.top_3_reviews.each do |review| %>
-    <li><%= review.title %></li>
-    <li><%= review.rating  %></li>
+      <li><%= review.title %></li>
+      <li><%= review.rating  %></li>
     <% if review.user == nil %>
-    <li>No User</li>
+      <li>No User</li>
     <% else %>
-    <li><%= link_to review.user.name, user_path(review.user) %></li>
+      <li><%= link_to review.user.name, user_path(review.user) %></li>
     <% end %>
     <% end %>
   </ul>
 </section>
-<h4>Lowest Ratings</h4>
+
+
 <section id="bottom_3_reviews">
+  <h4>Lowest Ratings</h4>
   <ul>
     <% @book.bottom_3_reviews.each do |review| %>
-    <li><%= review.title %></li>
-    <li><%= review.rating %></li>
+      <li><%= review.title %></li>
+      <li><%= review.rating %></li>
     <% if review.user == nil %>
-    <li>No User</li>
-      <% else %>
-    <li><%= link_to review.user.name, user_path(review.user) %></li>
+      <li>No User</li>
+    <% else %>
+      <li><%= link_to review.user.name, user_path(review.user) %></li>
     <% end %>
     <% end %>
   </ul>
-</section>
-<h5>Average Rating for this book:</h5>
-<section id="average_rating">
-  <p><%= @book.avg_rating %></p>
 </section>

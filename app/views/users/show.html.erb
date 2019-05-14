@@ -1,8 +1,9 @@
 <h1><%= @user.name %> Show Page</<h1>
+
   <section id="show-links">
     <%= link_to "Newest Reviews", user_path(@user, sort: :desc) %>
     <%= link_to "Oldest Reviews", user_path(@user, sort: :asc) %>
-    </section>
+  </section>
 
   <section id="review-list">
     <h2><%= @user.name %>'s Reviews</h2>
@@ -24,17 +25,17 @@
     <% else %>
 
     <% @sort_reviews.each do |review| %>
-    <ul id="review-<%= review.id %>">
-      <li><%= link_to review.book.title, book_path(review.book) %></li>
-      <li><img class="review_img" src="<%= review.book.cover_image %>"></li>
-      <p><%= review.title %></p>
-      <li><%= review.rating %></li>
-      <li><%= review.description %></li>
-      <p>Review created at: <%= review.created_at %></p>
-      <%= link_to "Delete Review", book_review_path(review.id, review.user_id), method: :delete %>
-    </ul>
+      <ul id="review-<%= review.id %>">
+        <li><%= link_to review.book.title, book_path(review.book) %></li>
+        <li><img class="review_img" src="<%= review.book.cover_image %>"></li>
+        <p><%= review.title %></p>
+        <li><%= review.rating %></li>
+        <li><%= review.description %></li>
+        <p>Review created at: <%= review.created_at %></p>
+        <%= link_to "Delete Review", book_review_path(review.id, review.user_id), method: :delete %>
+      </ul>
 
     <% end %>
     <% end %>
-    
+
   </section>
