@@ -3,10 +3,12 @@ class BooksController < ApplicationController
   def index
     if params[:sort] == "rating"
       @books = Book.avg_rating_order(params[:order])
+      # @no_reviews = Book.no_reviews
     elsif params[:sort] == "pages"
       @books = Book.sort_page_count(params[:order])
     elsif params[:sort] == "reviews"
       @books = Book.sort_reviews(params[:order])
+      # @no_reviews = Book.no_reviews
     else
       @books = Book.all
     end

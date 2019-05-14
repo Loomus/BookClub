@@ -67,3 +67,26 @@
     </ul>
 <% end %>
 </div>
+<% if @no_reviews != nil %>
+<div id="not-reviewed">
+  <% @no_reviews.each do |book| %>
+ <ul>
+   <li>
+     <%= link_to book.title, book_path(book) %>
+   </li>
+   <li>
+     <%= book.pages %>
+   </li>
+   <li>
+     <%= book.year %>
+   </li>
+     <img class="img-thumbnail" src="<%= book.cover_image %>">
+   <% book.authors.each do |author| %>
+   <p>
+     Authored By: <%= link_to author.name, author_path(author) %>
+   </p>
+   <% end %>
+  </ul>
+<% end %>
+</div>
+<% end %>

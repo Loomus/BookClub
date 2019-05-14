@@ -65,4 +65,8 @@ class Book < ApplicationRecord
   def self.most_reviews
     User.joins(:reviews).order("reviews.count desc").group(:id).limit(3)
   end
+
+  # def self.no_reviews
+  #   binding.pry
+  # end
 end
