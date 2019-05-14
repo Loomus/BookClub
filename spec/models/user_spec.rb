@@ -43,9 +43,9 @@ describe User do
   end
   describe "Class Methods" do
     it ".most_reviews" do
-    book = Book.create!(title: "whatever", pages: 200, year: 1990, cover_image: "www.google.com")
-    book_2 = Book.create!(title: "whatever", pages: 200, year: 1990, cover_image: "www.google.com")
-    book_3 = Book.create!(title: "whatever", pages: 200, year: 1990, cover_image: "www.google.com")
+    book = Book.create!(title: "whatev", pages: 200, year: 1990, cover_image: "www.google.com")
+    book_2 = Book.create!(title: "wahaha", pages: 200, year: 1990, cover_image: "www.google.com")
+    book_3 = Book.create!(title: "whatever man", pages: 200, year: 1990, cover_image: "www.google.com")
 
     review = Review.create!(title: "new rev 1", rating: 3, description: "adkjsfalkjsdf", user: @user_3, book: book )
     review_2 = Review.create!(title: "new rev 2", rating: 3, description: "adkjsfalkjsdf", user: @user_3, book: book_2)

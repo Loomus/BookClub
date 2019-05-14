@@ -51,6 +51,7 @@ RSpec.describe "Book index page" do
     @review_20 = Review.create!(title: "review 11", rating: 1, description: "Book 1 review", user: @user_5, book: @book_1)
     @review_21 = Review.create!(title: "review 12", rating: 1, description: "Book 1 review", user: @user_6, book: @book_1)
   end
+  
 
   describe "As a visitor I see a navigation bar" do
     it "It includes a links to the home page and a link to browse all books" do

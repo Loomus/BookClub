@@ -28,9 +28,10 @@ class BooksController < ApplicationController
       pages = book_params[:pages]
       year = book_params[:year]
       cover_image = book_params[:cover_image]
+      @book = Book.new(title: title, pages: pages, year: year, cover_image: cover_image)
     if Book.find_by(title: title)
       redirect_to new_book_path
-    else @book = Book.create(title: title, pages: pages, year: year, cover_image: cover_image)
+    elsif @book.save
       @authors = author_params[:authors]
       @authors.titleize.split(", ").each do |author_name|
       @new_authors = Author.find_or_create_by(name: author_name)

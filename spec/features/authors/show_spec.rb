@@ -27,8 +27,8 @@ describe "Author show page" do
       @review_b3_1 = Review.create!(title: "book 3 review 1", rating: 3, description: "Very good book indeed", book: @book_3, user: @user_1)
       @review_b3_2 = Review.create!(title: "book 3 review 1", rating: 5, description: "Very good book indeed", book: @book_3, user: @user_2)
       @review_b3_3 = Review.create!(title: "book 3 review 1", rating: 4, description: "Very good book indeed", book: @book_3, user: @user_3)
-
   end
+
   describe "When i visit author_path" do
     it "I see all book titles by that author, year of publication, pages, other authors" do
 

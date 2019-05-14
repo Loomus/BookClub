@@ -8,5 +8,4 @@ class AuthorsController < ApplicationController
     @author = Author.destroy(params[:id])
     redirect_to books_path
   end
-
 end

@@ -5,7 +5,7 @@ class Book < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :users, through: :reviews
 
-  validates_presence_of :title
+  validates_uniqueness_of :title
   validates_presence_of :pages
   validates_presence_of :year
   validates_presence_of :cover_image
