@@ -29,6 +29,7 @@ class BooksController < ApplicationController
       title = book_params[:title].titleize
       pages = book_params[:pages]
       year = book_params[:year]
+      binding.pry
       cover_image = book_params[:cover_image]
       @book = Book.new(title: title, pages: pages, year: year, cover_image: cover_image)
     if Book.find_by(title: title)
