@@ -96,30 +96,84 @@ describe "Author show page" do
       expect(current_path).to eq(books_path)
       expect(page).to_not have_content(author.name)
     end
+    it "If author is deleted, the book is deleted" do
+      author = Author.create!(name: "Jimmy")
+      book_1 = Book.create!(title: "Book 1 for delete author", pages: 888, year: 1978, cover_image: "www.google.com")
+      book_2 = Book.create!(title: "Book 2 for delete author", pages: 885, year: 1979, cover_image: "www.yahoo.com")
+      author.books << [book_1, book_2]
+
+      visit author_path(author)
+
+      within("#delete") do
+        click_link "Delete Author"
+      end
+      expect(current_path).to eq(books_path)
+
+      expect(page).to_not have_content(author.name)
+
+      expect(page).to_not have_content(book_1.title)
+      expect(page).to_not have_content(book_1.pages)
+      expect(page).to_not have_content(book_1.year)
+      expect(page).to_not have_xpath('//img[@src="www.google.com"]')
+
+      expect(page).to_not have_content(book_2.title)
+      expect(page).to_not have_content(book_2.pages)
+      expect(page).to_not have_content(book_2.year)
+      expect(page).to_not have_xpath('//img[@src="www.yahoo.com"]')
+    end
+
+    it "If author is a coauthor for a book and author is deleted, the book is deleted and other author is deleted" do
+      author = Author.create!(name: "Jimmy")
+      author_2 = Author.create!(name: "Amy")
+      book_1 = Book.create!(title: "Book 1 for delete author", pages: 888, year: 1978, cover_image: "www.google.com")
+
+      author.books << book_1
+      author_2.books << book_1
+
+      visit author_path(author)
+
+      within("#delete") do
+        click_link "Delete Author"
+      end
+      expect(current_path).to eq(books_path)
+
+      expect(page).to_not have_content(author.name)
+      expect(page).to_not have_content(author_2.name)
+
+      expect(page).to_not have_content(book_1.title)
+      expect(page).to_not have_content(book_1.pages)
+      expect(page).to_not have_content(book_1.year)
+      expect(page).to_not have_xpath('//img[@src="www.google.com"]')
+    end
+    it "If author is a coauthor for a book and the coauthor has other books, the author and book is deleted but not ther other author" do
+      author = Author.create!(name: "Jimmy")
+      author_2 = Author.create!(name: "Amy")
+      book_1 = Book.create!(title: "Book 1 for delete author", pages: 888, year: 1978, cover_image: "www.google.com")
+      book_2 = Book.create!(title: "Should not be deleted", pages: 112, year: 1998, cover_image: "www.yahoo.com")
+
+      author.books << book_1
+      author_2.books << [book_1, book_2]
+
+      visit author_path(author)
+
+      within("#delete") do
+        click_link "Delete Author"
+      end
+      expect(current_path).to eq(books_path)
+
+      expect(page).to_not have_content(author.name)
+
+      expect(page).to_not have_content(book_1.title)
+      expect(page).to_not have_content(book_1.pages)
+      expect(page).to_not have_content(book_1.year)
+      expect(page).to_not have_xpath('//img[@src="www.google.com"]')
+
+      expect(page).to have_content(author_2.name)
+
+      expect(page).to have_content(book_2.title)
+      expect(page).to have_content(book_2.pages)
+      expect(page).to have_content(book_2.year)
+      expect(page).to have_xpath('//img[@src="www.yahoo.com"]')
+    end
   end
 end
-# As a Visitor,
-# When I visit an author's show page,
-# I see a link on the page to delete the author.
-# This link should return me to the book index page where I
-# no longer see this author listed.
-# If this author was the only author for any book, that book is also deleted.
-# If this author co-authored a book with someone else, that book should also be deleted, but not the other author.
-#
-# (you may need to delete other content before you can delete an author or book)
-# DO THESE STORIES FIRST:
-#
-# User Story 14, Author Show Page
-# Checklist:
-#   base code tests are written
-#   base code is written to pass tests
-#   edge case ("sad path") tests written
-#   edge case code written
-#   code is reviewed
-#   branch is merged
-#   all tests still pass
-# child of #9
-#
-# child of #33
-#
-# depends on #14

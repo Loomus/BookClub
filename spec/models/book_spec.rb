@@ -135,7 +135,7 @@ describe Book do
 
         expect(@books.most_reviews).to eq([@user_3, @user_1, @user_2])
       end
-      xit ".no_reviews" do
+      it ".no_reviews" do
         book_7 = Book.create!(title: "Book 7 no review", pages: 223, year: 1987, cover_image: "www.google.com")
           author_1 = book_7.authors.create!(name: "Shrek")
         book_8 = Book.create!(title: "Book 8 no review", pages: 435, year: 1996, cover_image: "www.yahoo.com")

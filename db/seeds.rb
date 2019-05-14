@@ -25,7 +25,7 @@ lotr_3 = Book.create!(title: "The Return of the King", pages: 460, year: 1955, c
 unearthed = Book.create!(title: "Unearthed", pages: 436, year: 2018, cover_image: "https://images.gr-assets.com/books/1495338003l/32941343.jpg")
 omens = Book.create!(title: "Good Omens", pages: 434, year: 1990, cover_image: "https://images-na.ssl-images-amazon.com/images/I/8167H8DUjnL.jpg")
 creatures = Book.create!(title: "Beautiful Creatures", pages: 563, year: 2009, cover_image: "https://img1.od-cdn.com/ImageType-400/4575-1/FB5/05C/BF/%7BFB505CBF-F575-4CF0-9041-BF6108D2F5E9%7DImg400.jpg")
-
+whatever = Book.create!(title: "Whatever", pages: 221, year: 1977, cover_image: "www.google.com")
 
 # All authors
 
@@ -56,6 +56,7 @@ terry.books << omens
 neil.books << omens
 kami.books << creatures
 margaret.books << creatures
+
 
 #users
 

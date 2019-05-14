@@ -67,10 +67,12 @@
     </ul>
 <% end %>
 </div>
+
 <% if @no_reviews != nil %>
-<div id="not-reviewed">
-  <% @no_reviews.each do |book| %>
- <ul>
+<h2>Books Not Reviewed</h2>
+<% @no_reviews.each do |book| %>
+<div>
+ <ul id="not-reviewed-<%= book.id %>">
    <li>
      <%= link_to book.title, book_path(book) %>
    </li>
@@ -87,6 +89,6 @@
    </p>
    <% end %>
   </ul>
-<% end %>
 </div>
+<% end %>
 <% end %>

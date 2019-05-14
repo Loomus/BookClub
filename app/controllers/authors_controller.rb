@@ -5,7 +5,10 @@ class AuthorsController < ApplicationController
   end
 
   def destroy
-    @author = Author.destroy(params[:id])
+    @author = Author.find(params[:id])
+    @books = @author.books
+    Book.destroy(@books.ids)
+    @author.destroy
     redirect_to books_path
   end
 end

@@ -530,7 +530,7 @@ RSpec.describe "Book index page" do
 
         expect(current_path).to eq(new_book_path)
       end
-      xit "books that are not reviewed are displayed at the bottom of the page" do
+      it "books that are not reviewed are displayed at the bottom of the page" do
         book_7 = Book.create!(title: "Book 7 no review", pages: 223, year: 1987, cover_image: "www.google.com")
           author_1 = book_7.authors.create!(name: "Shrek")
         book_8 = Book.create!(title: "Book 8 no review", pages: 435, year: 1996, cover_image: "www.yahoo.com")
@@ -544,26 +544,28 @@ RSpec.describe "Book index page" do
           click_link "Highest Rated"
         end
 
-        within("#not-reviewed") do
+        within("#not-reviewed-#{book_7.id}") do
           expect(page).to have_link(book_7.title)
-          expect(page).to have_link(book_7.pages)
-          expect(page).to have_link(book_7.year)
+          expect(page).to have_content(book_7.pages)
+          expect(page).to have_content(book_7.year)
           expect(page).to have_xpath('//img[@src="www.google.com"]')
-
+        end
+        within("#not-reviewed-#{book_8.id}") do
           expect(page).to have_link(book_8.title)
-          expect(page).to have_link(book_8.pages)
-          expect(page).to have_link(book_8.year)
+          expect(page).to have_content(book_8.pages)
+          expect(page).to have_content(book_8.year)
           expect(page).to have_xpath('//img[@src="www.yahoo.com"]')
-
+        end
+        within("#not-reviewed-#{book_9.id}") do
           expect(page).to have_link(book_9.title)
-          expect(page).to have_link(book_9.pages)
-          expect(page).to have_link(book_9.year)
+          expect(page).to have_content(book_9.pages)
+          expect(page).to have_content(book_9.year)
           expect(page).to have_xpath('//img[@src="www.askjeeves.com"]')
+          end
         end
       end
     end
   end
-end
 
 # within("#sorting") do
 #     click_link "Lowest Rated"

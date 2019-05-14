@@ -1,5 +1,5 @@
 class Book < ApplicationRecord
-  has_many :book_authors, dependent: :destroy
+  has_many :book_authors
   has_many :authors, through: :book_authors, dependent: :destroy
 
   has_many :reviews, dependent: :destroy
@@ -66,7 +66,9 @@ class Book < ApplicationRecord
     User.joins(:reviews).order("reviews.count desc").group(:id).limit(3)
   end
 
-  # def self.no_reviews
-  #   binding.pry
-  # end
+  def self.no_reviews
+    joins('LEFT OUTER JOIN reviews ON books.id = reviews.book_id')
+    .where('reviews.book_id IS NULL')
+  end
 end
+ # SELECT * FROM books LEFT OUTER JOIN reviews ON books.id = reviews.book_id where reviews.book_id IS null;

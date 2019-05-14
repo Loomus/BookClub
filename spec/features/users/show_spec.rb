@@ -33,6 +33,7 @@ describe User do
     @review_8 = Review.create!(title: "review 8", rating: 3, description: "Book 1 review", user: @user_2, book: @book_3)
     @review_9 = Review.create!(title: "review 9", rating: 3, description: "Book 1 review", user: @user_3, book: @book_3)
   end
+
   describe "When I click on a user's name for any book review" do
     it "takes me to a show page for that user and show all the reviews that the user has written" do
 
@@ -81,7 +82,7 @@ describe User do
         visit user_path(user)
 
         within("#show-links") do
-          click_link "Newest Reviews"
+          click_link "Oldest Reviews"
         end
 
         within("#review-list") do
@@ -96,7 +97,7 @@ describe User do
         end
 
         within("#show-links") do
-          click_link "Oldest Reviews"
+          click_link "Newest Reviews"
         end
 
         within("#review-list") do
