@@ -51,7 +51,7 @@
         <% else %>
           <p class="card-text"><%= link_to review.user.name, user_path(review.user) %></p>
         <% end %>
-        <p class="card-text"><%= review.rating %></p>
+        <p class="card-text">Rating: <%= review.rating %></p>
         <p class="card-text"><%= review.description %></p>
       </div>
     </div>
