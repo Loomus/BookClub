@@ -229,3 +229,69 @@
           </ul>
         <% end %>
         <% end %>
+
+        <section id="review-link">
+          <%= link_to "Add a Review", new_book_review_path(@book) %>
+          <%= link_to "Delete Book", book_path(@book), method: :delete %>
+        </section>
+
+
+        <section>
+          <ul>
+            <% @book.authors.each do |author| %>
+              <li><%= link_to author.name, author_path(author) %></li>
+            <% end %>
+
+
+            <ul>
+              <% @book.top_3_reviews.each do |review| %>
+                <li><%= review.title %></li>
+                <li><%= review.rating  %></li>
+                <li>No User</li>
+              <% else %>
+                <li><%= link_to review.user.name, user_path(review.user) %></li>
+              <% end %>
+              <% end %>
+            </ul>
+          </section>
+
+
+
+
+              <% if review.user == nil %>
+                <li>No User</li>
+              <% else %>
+                <li><%= link_to review.user.name, user_path(review.user) %></li>
+              <% end %>
+                <li><%= review.rating %></li>
+                <li><%= review.description %></li>
+              <% end %>
+
+
+
+              <section id="bottom_3_reviews">
+                <h4>Lowest Ratings</h4>
+                <ul>
+                  <% @book.bottom_3_reviews.each do |review| %>
+                    <li><%= review.title %></li>
+                    <li><%= review.rating %></li>
+                  <% if review.user == nil %>
+                    <li>No User</li>
+                  <% else %>
+                    <li><%= link_to review.user.name, user_path(review.user) %></li>
+                  <% end %>
+                  <% end %>
+                </ul>
+              </section>
+
+
+                  <% if book.reviews.count == 0 %>
+                  <li>No reviews found</li>
+                  <% else %>
+                  <p><%= link_to book.top_review.first.user.name, user_path(book.top_review.first.user) %></p>
+                  <p><%= book.top_review.first.title %></p>
+                  <p><%= book.top_review.first.rating %></p>
+                  <% end %>
+                </ul>
+                <% end %>
+              </div>

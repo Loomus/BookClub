@@ -1,32 +1,44 @@
-<h1><%= @author.name %> Show Page</h1>
-
-<h2 id="delete"><%= link_to "Delete Author", author_path(@author), method: :delete %></h2>
-
-<div id="author-book-info">
-
-  <% @author.books.each do |book| %>
-
-  <ul id="book-<%= book.id %>">
-    <li><%= link_to book.title, book_path(book) %></li>
-      <% if book.reviews.count == 0 %>
-        <li>No reviews found</li>
-      <% else %>
-        <p><%= book.top_review.first.title %></p>
-        <p><%= book.top_review.first.rating %></p>
-        <p><%= link_to book.top_review.first.user.name, user_path(book.top_review.first.user) %></p>
-      <% end %>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <h1 class="navbar-brand">Show Page</h1>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto", id="review-link">
+      <li class="nav-item" id="delete">
+        <%= link_to "Delete Author", author_path(@author),{ class: "nav-link", method: :delete} %>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div>
+  <h1 class="book-header"><%= @author.name %> Show Page</h1>
+</div>
 
 
-    <li><img class="img-thumbnail" src="<%= book.cover_image %>"></li>
-    <li><%= book.year %></li>
-    <li><%= book.pages %></li>
-      <% book.authors.each do |author| %>
-      <% if author.name != @author.name %>
-        <li>Co Authored by: <%= link_to author.name, author_path(author)%></li>
-      <% end %>
-      <% end %>
-  </ul>
-
-  <% end %>
-
+<div class="container" id="review-list">
+  <div class="row" id="author-book-info">
+    <% @author.books.each do |book| %>
+    <div class="col-sm-3" id="book-<%= book.id %>">
+      <div class="card">
+        <img class="card-img-top" src="<%= book.cover_image %>">
+          <div class="card-block">
+            <h5 class="card-title"><%= link_to book.title, book_path(book) %></h5>
+            <h5 class="card-title">Pages: <%= book.pages %></h5>
+            <p class="card-text">Published: <%= book.year %></p>
+            <% book.authors.each do |author| %>
+            <% if author.name != @author.name %>
+            <p class="card-text">Co Authored by: <%= link_to author.name, author_path(author)%></p>
+            <% end %>
+            <% end %>
+            <% if book.reviews.count == 0 %>
+            <p class="card-text">No reviews found</p>
+            <% else %>
+            <h5>Top Review</h5>
+            <p class="card-text">By: <%= link_to book.top_review.first.user.name, user_path(book.top_review.first.user) %></p>
+            <p class="card-text">Title: <%= book.top_review.first.title %></p>
+            <p class="card-text">Rating: <%= book.top_review.first.rating %></p>
+            <% end %>
+          </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
 </div>

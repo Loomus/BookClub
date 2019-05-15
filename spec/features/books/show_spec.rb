@@ -59,17 +59,17 @@ describe "Books Show page" do
       visit book_path(@book_1)
 
       within("#top_3_reviews") do
-        expect(page.all("li")[0]).to have_content(@review_10.title)
-        expect(page.all("li")[1]).to have_content(@review_10.rating)
-        expect(page.all("li")[2]).to have_link(@user_1.name)
+        expect(page.all("h5")[0]).to have_content(@review_10.title)
+        expect(page.all("p")[0]).to have_content(@review_10.rating)
+        expect(page.all("p")[1]).to have_link(@user_1.name)
 
-        expect(page.all("li")[3]).to have_content(@review_2.title)
-        expect(page.all("li")[4]).to have_content(@review_2.rating)
-        expect(page.all("li")[5]).to have_link(@user_2.name)
+        expect(page.all("h5")[1]).to have_content(@review_2.title)
+        expect(page.all("p")[2]).to have_content(@review_2.rating)
+        expect(page.all("p")[3]).to have_link(@user_2.name)
 
-        expect(page.all("li")[6]).to have_content(@review_11.title)
-        expect(page.all("li")[7]).to have_content(@review_11.rating)
-        expect(page.all("li")[8]).to have_link(@user_3.name)
+        expect(page.all("h5")[2]).to have_content(@review_11.title)
+        expect(page.all("p")[4]).to have_content(@review_11.rating)
+        expect(page.all("p")[5]).to have_link(@user_3.name)
       end
     end
     it "show the bottom three reviews for this book (title, rating and user only)" do
@@ -78,17 +78,17 @@ describe "Books Show page" do
 
       within("#bottom_3_reviews") do
 
-        expect(page.all("li")[0]).to have_content(@review_12.title)
-        expect(page.all("li")[1]).to have_content(@review_12.rating)
-        expect(page.all("li")[2]).to have_link(@user_6.name)
+        expect(page.all("h5")[0]).to have_content(@review_12.title)
+        expect(page.all("p")[0]).to have_content(@review_12.rating)
+        expect(page.all("p")[1]).to have_link(@user_6.name)
 
-        expect(page.all("li")[3]).to have_content(@review_3.title)
-        expect(page.all("li")[4]).to have_content(@review_3.rating)
-        expect(page.all("li")[5]).to have_link(@user_5.name)
+        expect(page.all("h5")[1]).to have_content(@review_3.title)
+        expect(page.all("p")[2]).to have_content(@review_3.rating)
+        expect(page.all("p")[3]).to have_link(@user_5.name)
 
-        expect(page.all("li")[6]).to have_content(@review_1.title)
-        expect(page.all("li")[7]).to have_content(@review_1.rating)
-        expect(page.all("li")[8]).to have_link(@user_4.name)
+        expect(page.all("h5")[2]).to have_content(@review_1.title)
+        expect(page.all("p")[4]).to have_content(@review_1.rating)
+        expect(page.all("p")[5]).to have_link(@user_4.name)
       end
     end
 
