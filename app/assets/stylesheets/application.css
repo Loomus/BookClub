@@ -13,9 +13,31 @@
  *= require_tree .
  *= require_self
  */
+nav {
+  color: grey;
+}
+
+#divider {
+  text-align: center;
+}
+
+#form-heading {
+  text-align: center;
+}
+
+.topnav {
+  background-color: grey;
+  font-size: 20px;
+  text-align: center;
+}
+
+.topnav a {
+  color: black;
+}
 
 body {
-  background-color: grey;
+  background-image: url("https://reformedforum.org/wp-content/blogs.dir/1/files/2016/06/book.jpg");
+  background-attachment: fixed;
 }
 
 img {
@@ -30,4 +52,12 @@ img {
 
 .container {
     max-width: 1200px;
+}
+
+#user-divider {
+  text-align: center;
+}
+
+.book-header {
+  text-align: center;
 }

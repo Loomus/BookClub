@@ -1,70 +1,103 @@
-<h1><%= @book.title %> Show Page</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <h1 class="navbar-brand">Show Page</h1>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto", id="review-link">
+      <li class="nav-item">
+        <%= link_to "Add a Review", new_book_review_path(@book), { class: "nav-link"} %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Delete Book", book_path(@book), method: :delete, class: "nav-link" %>
+      </li>
+    </ul>
+  </div>
+</nav>
 
-<section id="average_rating">
-  <h5>Average Rating for this book:</h5>
-    <p><%= @book.avg_rating %></p>
-</section>
 
-<section id="review-link">
-  <%= link_to "Add a Review", new_book_review_path(@book) %>
-  <%= link_to "Delete Book", book_path(@book), method: :delete %>
-</section>
+<div id="average_rating">
+  <h1 class="book-header"><%= @book.title %> Show Page</h1>
+  <h5 class="book-header">Average Rating for this book:</h5>
+    <p class="book-header"><%= @book.avg_rating %></p>
+</div>
 
-<section>
-  <ul>
-    <% @book.authors.each do |author| %>
-      <li><%= link_to author.name, author_path(author) %></li>
-    <% end %>
-    <li>Published In: <%= @book.year %></li>
-    <li>Page Number: <%= @book.pages %></li>
-    <li><img class="img-thumbnail" src="<%= @book.cover_image %>"></li>
-  </ul>
-</section>
 
-<section id="review_info">
-  <ul>
+<div class="container" id="author-info">
+  <div class="row">
+    <div class="col-sm-3" >
+      <div class="card">
+        <img class="card-img-top" src="<%= @book.cover_image %>">
+          <div class="card-block" id="author-info">
+            <% @book.authors.each do |author| %>
+            <h5 class="card-title">Authored By: <%= link_to author.name, author_path(author) %></h5>
+            <% end %>
+            <p class="card-text">Published In: <%= @book.year %></p>
+            <p class="card-text">Page Number: <%= @book.pages %></p>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2 class="book-header">All Reviews</h2>
+
+<div class="row" id="review_info">
+  <div class="col-sm-3">
     <% @book.reviews.each do |review| %>
-      <li><%= review.title %></li>
-    <% if review.user == nil %>
-      <li>No User</li>
-    <% else %>
-      <li><%= link_to review.user.name, user_path(review.user) %></li>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= review.title %></h5>
+        <p class="card-text"></p>
+        <% if review.user == nil %>
+          <p class="card-text">No User</p>
+        <% else %>
+          <p class="card-text"><%= link_to review.user.name, user_path(review.user) %></p>
+        <% end %>
+        <p class="card-text"><%= review.rating %></p>
+        <p class="card-text"><%= review.description %></p>
+      </div>
+    </div>
     <% end %>
-      <li><%= review.rating %></li>
-      <li><%= review.description %></li>
-    <% end %>
-  </ul>
-</section>
+  </div>
+</div>
 
-<h2>Statistics</h2>
 
-<section id="top_3_reviews">
-  <h3>Top Ratings</h3>
-  <ul>
+<h1 class="book-header">Statistics</h1>
+
+<h2 class="book-header">Top Reviews</h2>
+
+<div class="row" id="top_3_reviews">
+  <div class="col-sm-3">
     <% @book.top_3_reviews.each do |review| %>
-      <li><%= review.title %></li>
-      <li><%= review.rating  %></li>
-    <% if review.user == nil %>
-      <li>No User</li>
-    <% else %>
-      <li><%= link_to review.user.name, user_path(review.user) %></li>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= review.title %></h5>
+        <p class="card-text"><%= review.rating %></p>
+        <% if review.user == nil %>
+        <p class="card-text">No User</p>
+        <% else %>
+        <p><%= link_to review.user.name, user_path(review.user) %></p>
+        <% end %>
+      </div>
+    </div>
     <% end %>
-    <% end %>
-  </ul>
-</section>
+  </div>
+</div>
 
+<h2 class="book-header">Worst Reviews</h2>
 
-<section id="bottom_3_reviews">
-  <h4>Lowest Ratings</h4>
-  <ul>
+<div class="row" id="bottom_3_reviews">
+  <div class="col-sm-3">
     <% @book.bottom_3_reviews.each do |review| %>
-      <li><%= review.title %></li>
-      <li><%= review.rating %></li>
-    <% if review.user == nil %>
-      <li>No User</li>
-    <% else %>
-      <li><%= link_to review.user.name, user_path(review.user) %></li>
+    <div class="card" id="show-b">
+      <div class="card-body">
+        <h5 class="card-title"><%= review.title %></h5>
+        <p class="card-text"><%= review.rating %></p>
+        <% if review.user == nil %>
+        <p class="card-text">No User</p>
+        <% else %>
+        <p><%= link_to review.user.name, user_path(review.user) %></p>
+        <% end %>
+      </div>
+    </div>
     <% end %>
-    <% end %>
-  </ul>
-</section>
+  </div>
+</div>

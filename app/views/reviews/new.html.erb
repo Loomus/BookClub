@@ -1,16 +1,28 @@
-<%= form_for [@book, @review] do |f| %>
-
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-
-  <%= f.label :user %>
-  <%= f.text_field :user %>
-
-  <%= f.label :rating %>
-  <%= f.number_field :rating %>
-
-  <%= f.label :description %>
-  <%= f.text_area :description %>
-
-  <%= f.submit %>
+<div class="container form-input">
+  <h2 id="form-heading">Create Review</h2>
+  <%= form_for [@book, @review] do |f| %>
+    <div class="row">
+      <ul class="col-sm">
+        <p><%= f.label :title %></p><br/>
+        <p><%= f.text_field :title %></p>
+      </ul>
+      <ul class="col-sm">
+        <p><%= f.label :user %></p><br/>
+        <p><%= f.text_field :user %></p>
+      </ul>
+      <ul class="col-sm">
+        <p><%= f.label :rating %></p><br/>
+        <p><%= f.number_field :rating %></p>
+      </ul>
+      <ul class="col-sm">
+        <p><%= f.label :description %></p><br/>
+        <p><%= f.text_area :description %></p>
+      </ul>
+    </div>
+      <div class="row">
+        <ul class="col-sm">
+          <p><%= f.submit %></p>
+        </ul>
+    </div>
+</div>
 <% end %>
