@@ -184,15 +184,31 @@
         null,
         1,
         null,
+        null,
+        1,
+        1,
+        1,
         1,
         1,
         null,
         null,
         1,
+        1,
+        1,
+        null,
+        null,
         null,
         1,
         null,
         null,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
         null
       ],
       "/Users/davehardy632/turing/2repeat/projects/BookClub/app/helpers/application_helper.rb": [
@@ -1556,6 +1572,6 @@
         null
       ]
     },
-    "timestamp": 1557929341
+    "timestamp": 1560545064
   }
 }

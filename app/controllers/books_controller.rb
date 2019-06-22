@@ -40,8 +40,6 @@ class BooksController < ApplicationController
       @book.authors << @new_authors
       end
       redirect_to book_path(@book)
-    elsif @book.save == false
-      redirect_to new_book_path
     end
   end
 
